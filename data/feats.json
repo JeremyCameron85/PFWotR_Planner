@@ -1,0 +1,5 @@
+[
+    {"name": "Power Attack", "prerequisite_level": 1},
+    {"name": "Cleave", "prerequisite_level": 2},
+    {"name": "Toughness", "prerequisite_level": 1}
+]
