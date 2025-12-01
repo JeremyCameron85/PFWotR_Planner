@@ -45,6 +45,6 @@ class CharacterTab(QWidget):
 
         layout.addWidget(stats_group)
 
-        def update_stat(self, stat_name, value):
-            self.character.stats[stat_name] = value
-            self.stats_changed.emit()
+    def update_stat(self, stat_name, value):
+        self.character.stats[stat_name] = value
+        self.stats_changed.emit()
