@@ -16,8 +16,11 @@ class Character:
             feat_level = feat.get("prerequisite_level", 1) <= self.level
             feat_stats = all(
                 self.stats.get(stat,0) >= val
-                for stat,val in feat.get("prerequisite_stats", {}).items()
+                for stat, val in feat.get("prerequisite_stats", {}).items()
             )
-            if feat_level and feat_stats:
+            required_feats = feat.get("prerequisite_feats", [])
+            feat_feats = all(req in self.feats for req in required_feats)
+
+            if feat_level and feat_stats and feat_feats:
                 feats_list.append(feat)
         return feats_list
