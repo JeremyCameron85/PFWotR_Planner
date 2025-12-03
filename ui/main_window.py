@@ -1,7 +1,11 @@
 from PyQt6.QtWidgets import QMainWindow, QTabWidget
-from wotr_planner.ui.character_tab import CharacterTab
+from wotr_planner.ui.classes_tab import ClassTab
+from wotr_planner.ui.races_tab import RaceTab
+from wotr_planner.ui.stats_tab import StatsTab
 from wotr_planner.ui.skills_tab import SkillsTab
 from wotr_planner.ui.feats_tab import FeatsTab
+from wotr_planner.ui.background_tab import BackgroundTab
+from wotr_planner.ui.heritage_tab import HeritageTab
 from wotr_planner.models.character import Character
 
 class MainWindow(QMainWindow):
@@ -15,12 +19,44 @@ class MainWindow(QMainWindow):
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
 
-        self.character_tab = CharacterTab(self.character)
+        self.classes_tab = ClassTab(self.character)
+        self.races_tab = RaceTab(self.character)
+        self.heritage_tab = HeritageTab(self.character)
+        self.background_tab = BackgroundTab(self.character)
+        self.stats_tab = StatsTab(self.character)
         self.skills_tab = SkillsTab(self.character)
         self.feats_tab = FeatsTab(self.character)
 
-        self.character_tab.stats_changed.connect(self.feats_tab.update_feats)
+        self.stats_tab.stats_changed.connect(self.feats_tab.update_feats)
+        self.races_tab.race_changed.connect(self.on_race_changed)
+        self.classes_tab.class_changed.connect(self.on_class_changed)
+        self.feats_tab.feats_changed.connect(self.on_feats_changed)
+        self.background_tab.background_changed.connect(self.on_background_changed)
+        self.heritage_tab.heritage_changed.connect(self.on_heritage_changed)
 
-        self.tabs.addTab(self.character_tab, "Character")
+        self.tabs.addTab(self.classes_tab, "Class")
+        self.tabs.addTab(self.races_tab, "Race")
+        self.tabs.addTab(self.heritage_tab, "Heritage")
+        self.tabs.addTab(self.background_tab, "Background")
+        self.tabs.addTab(self.stats_tab, "Ability Scores")
         self.tabs.addTab(self.skills_tab, "Skills")
         self.tabs.addTab(self.feats_tab, "Feats")
+
+    def on_race_changed(self):
+        self.stats_tab.apply_race_bonuses(self.character.race)
+        self.feats_tab.update_feats()
+
+    def on_class_changed(self):
+        self.feats_tab.update_feats()
+
+    def on_feats_changed(self):
+        self.stats_tab.recalculate_modifiers(self.character.feats)
+        self.skills_tab.update_skills_from_feats(self.character.feats)
+
+    def on_background_changed(self):
+        self.skills_tab.update_skills(self.character.background)
+        self.feats_tab.update_feats()
+
+    def on_heritage_changed(self):
+        self.stats_tab.apply_heritage_modifiers(self.character.heritage)
+        self.feats_tab.update_feats()

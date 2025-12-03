@@ -1,8 +1,11 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QListWidget, QPushButton
+from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
 import json
 
 class FeatsTab(QWidget):
+    feats_changed = pyqtSignal()
+
     def __init__(self, character):
         super().__init__()
         self.character = character
@@ -40,6 +43,7 @@ class FeatsTab(QWidget):
             self.character.feats.append(selected_feat)
             self.update_feats()
             self.refresh_selected_feats()
+            self.feats_changed.emit()
 
     def refresh_selected_feats(self):
         self.selected_list.clear()
