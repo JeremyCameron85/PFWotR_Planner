@@ -32,8 +32,17 @@ class CharacterTab(QWidget):
         stats_group.setLayout(stats_layout)
         self.stat_widgets = {}
 
+        stats = [
+            "Str",
+            "Dex",
+            "Con",
+            "Int",
+            "Wis",
+            "Cha"
+        ]
+
         row = 0
-        for stat in ["Str", "Dex", "Con", "Int", "Wis", "Cha"]:
+        for stat in stats:
             stats_layout.addWidget(QLabel(stat), row, 0)
             spin = QSpinBox()
             spin.setRange(1, 20)
