@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QMainWindow, QTabWidget
 from ui.character_tab import CharacterTab
+from ui.skills_tab import SkillsTab
 from ui.feats_tab import FeatsTab
 from models.character import Character
 
@@ -15,6 +16,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.tabs)
 
         self.character_tab = CharacterTab(self.character)
+        self.skills_tab = SkillsTab(self.character)
         self.feats_tab = FeatsTab(self.character)
 
         self.character_tab.stats_changed.connect(self.feats_tab.update_feats)
