@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QMainWindow, QTabWidget
-from ui.character_tab import CharacterTab
-from ui.skills_tab import SkillsTab
-from ui.feats_tab import FeatsTab
-from models.character import Character
+from wotr_planner.ui.character_tab import CharacterTab
+from wotr_planner.ui.skills_tab import SkillsTab
+from wotr_planner.ui.feats_tab import FeatsTab
+from wotr_planner.models.character import Character
 
 class MainWindow(QMainWindow):
     def __init__(self):

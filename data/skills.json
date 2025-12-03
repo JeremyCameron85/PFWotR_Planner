@@ -1,0 +1,13 @@
+[
+    { "name": "Athletics", "key_ability": "Str" },
+    { "name": "Mobility", "key_ability": "Dex" },
+    { "name": "Trickery", "key_ability": "Dex" },
+    { "name": "Stealth", "key_ability": "Dex" },
+    { "name": "Knowledge(Arcana)", "key_ability": "Int" },
+    { "name": "Knowledge(World)", "key_ability": "Int" },
+    { "name": "Lore(Nature)", "key_ability": "Wis" },
+    { "name": "Lore(Religion)", "key_ability":"Wis" },
+    { "name": "Perception", "key_ability": "Wis" },
+    { "name": "Persuasion", "key_ability": "Cha" },
+    { "name": "Use Magic Device", "key_ability": "Cha" }
+]

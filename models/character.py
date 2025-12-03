@@ -5,7 +5,27 @@ class Character:
         self.char_class = None
         self.level = 1
         self.feats = []
-        self.stats = {"Str":10, "Dex":10, "Con":10, "Int":10, "Wis":10, "Cha":10}
+        self.stats = {
+            "Str":10,
+            "Dex":10, 
+            "Con":10, 
+            "Int":10, 
+            "Wis":10, 
+            "Cha":10
+        }
+        self.skills = {
+            "Athletics": 0,
+            "Mobility": 0,
+            "Trickery": 0,
+            "Stealth": 0,
+            "Knowledge(Arcana)": 0,
+            "Knowledge(World)": 0,
+            "Lore(Nature)": 0,
+            "Lore(Religion)": 0,
+            "Perception": 0,
+            "Persuasion": 0,
+            "Use Magic Device": 0
+        }
 
     def level_up(self):
         self.level += 1
