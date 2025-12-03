@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QSpinBox, QGroupBox, QGridLayout
 from PyQt6.QtCore import pyqtSignal
+from pathlib import Path
 import json
 
 class CharacterTab(QWidget):
@@ -11,7 +12,9 @@ class CharacterTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        with open("data/races.json") as races_file:
+        base_dir = Path(__file__).resolve().parent.parent
+        races_path = base_dir / "data" / "races.json"
+        with races_path.open(encoding="utf-8") as races_file:
             self.races = json.load(races_file)
 
         layout.addWidget(QLabel("Select Race:"))
@@ -19,7 +22,8 @@ class CharacterTab(QWidget):
         self.race_combo.addItems([race["name"] for race in self.races])
         layout.addWidget(self.race_combo)
 
-        with open("data/classes.json") as classes_file:
+        classes_path = base_dir / "data" / "classes.json"
+        with classes_path.open(encoding="utf-8") as classes_file:
             self.classes = json.load(classes_file)
 
         layout.addWidget(QLabel("Select Class:"))

@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QListWidget, QPushButton
+from pathlib import Path
 import json
 
 class FeatsTab(QWidget):
@@ -8,7 +9,9 @@ class FeatsTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        with open("data/feats.json") as feats_file:
+        base_dir = Path(__file__).resolve().parent.parent
+        feats_path = base_dir / "data" / "feats.json"
+        with feats_path.open(encoding="utf-8") as feats_file:
             self.feats = json.load(feats_file)
 
         layout.addWidget(QLabel("Select Feat:"))

@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QGroupBox, QGridLayout
 from PyQt6.QtCore import pyqtSignal
+from pathlib import Path
 import json
-import os
 
 class SkillsTab(QWidget):
     skills_changed = pyqtSignal()
@@ -13,12 +13,9 @@ class SkillsTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
         
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        skills_path = os.path.join(base_dir, "data", "skills.json")
-        with open(skills_path, encoding="utf-8") as skills_file:
-            print("SKILLS PATH:", skills_path)
-            print("FILE CONTENTS:")
-            print(repr(open(skills_path, "r", encoding="utf-8").read()))
+        base_dir = Path(__file__).resolve().parent.parent
+        skills_path = base_dir / "data" / "skills.json"
+        with skills_path.open(encoding="utf-8") as skills_file:
             self.skills = json.load(skills_file)
 
         skills_group = QGroupBox("Skills")
