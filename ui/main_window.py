@@ -20,4 +20,5 @@ class MainWindow(QMainWindow):
         self.character_tab.stats_changed.connect(self.feats_tab.update_feats)
 
         self.tabs.addTab(self.character_tab, "Character")
+        self.tabs.addTab(self.skills_tab, "Skills")
         self.tabs.addTab(self.feats_tab, "Feats")
