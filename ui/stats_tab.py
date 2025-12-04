@@ -51,7 +51,7 @@ class StatsTab(QWidget):
             self.character.point_buy_stats[stat_name] = old_value
             spin = self.stat_widgets[stat_name]
             spin.blockSignals(True)
-            spin.setValue(old_value)
+            spin.setValue(self.character.stats[stat_name])
             spin.blockSignals(False)
             return
 
