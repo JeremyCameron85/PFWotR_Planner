@@ -34,8 +34,9 @@ class StatsTab(QWidget):
         for stat in stats:
             stats_layout.addWidget(QLabel(stat), row, 0)
             spin = QSpinBox()
-            spin.setRange(7, 18)
-            spin.setValue(self.character.stats[stat])
+            racial_mod = self.character.race.get("modifiers", {}).get(stat, 0) if self.character.race  else 0
+            spin.setRange(7 + racial_mod, 18 + racial_mod)
+            spin.setValue(self.character.point_buy_stats[stat] + racial_mod)
             spin.valueChanged.connect(lambda value, s=stat: self.update_stat(s, value))
             stats_layout.addWidget(spin, row, 1)
             self.stat_widgets[stat] = spin
@@ -43,15 +44,24 @@ class StatsTab(QWidget):
 
         layout.addWidget(stats_group)
 
-    def update_stat(self, stat_name, value):
+    def update_stat(self, stat_name, displayed_value):
+        racial_mod = 0
+        if self.character.heritage:
+            racial_mod = self.character.heritage.get("modifiers", {}).get(stat_name, 0)
+        elif self.character.race:
+            racial_mod = self.character.race.get("modifiers", {}).get(stat_name, 0)
+        else:
+            racial_mod = 0
+        
+        base_value = displayed_value - racial_mod
         old_value = self.character.point_buy_stats[stat_name]
-        self.character.point_buy_stats[stat_name] = value
+        self.character.point_buy_stats[stat_name] = base_value
 
         if self.total_points_spent() > 25:
             self.character.point_buy_stats[stat_name] = old_value
             spin = self.stat_widgets[stat_name]
             spin.blockSignals(True)
-            spin.setValue(self.character.stats[stat_name])
+            spin.setValue(old_value + racial_mod)
             spin.blockSignals(False)
             return
 
@@ -110,6 +120,8 @@ class StatsTab(QWidget):
 
         if self.character.heritage:
             for stat, bonus in self.character.heritage.get("modifiers", {}).items():
+                race_bonus = self.character.race.get("modifiers", {}).get(stat, 0) if self.character.race else 0
+                self.character.stats[stat] -= race_bonus
                 self.character.stats[stat] += bonus
 
         for feat in feats:
@@ -117,8 +129,16 @@ class StatsTab(QWidget):
                 self.character.stats[stat] += bonus
         
         for stat, spin in self.stat_widgets.items():
+            if self.character.heritage:
+                racial_mod = self.character.heritage.get("modifiers", {}).get(stat, 0)
+            elif self.character.race:
+                racial_mod = self.character.race.get("modifiers", {}).get(stat, 0)
+            else:
+                racial_mod = 0
+
             spin.blockSignals(True)
-            spin.setValue(self.character.stats[stat])
+            spin.setRange(7 + racial_mod, 18 + racial_mod)
+            spin.setValue(self.character.point_buy_stats[stat] + racial_mod)
             spin.blockSignals(False)
 
         self.update_points_label()
