@@ -3,6 +3,8 @@ class Character:
         self.name = ""
         self.race = None
         self.char_class = None
+        self.heritage = None
+        self.background = None
         self.level = 1
         self.feats = []
         self.base_stats = {
