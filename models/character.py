@@ -1,8 +1,8 @@
 class Character:
-    def __init__(self):
+    def __init__(self, char_class=None, race=None):
         self.name = ""
-        self.race = None
-        self.char_class = None
+        self.race = race or {"skill_points_bonus": 0}
+        self.char_class = char_class or {"skill_points": 0}
         self.heritage = None
         self.background = None
         self.level = 1
@@ -55,7 +55,7 @@ class Character:
         return feats_list
     
     def skill_points_per_level(self) -> int:
-        base = self.char_class.get("skill_points", 0) if self.char_class else 0
+        base = self.char_class.get("skill_points", 0)
         int_mod = (self.stats["Int"] - 10) // 2
-        race_mod = self.race.get("skill_points_bonus", 0) if self.race else 0
+        race_mod = self.race.get("skill_points_bonus", 0)
         return max(1, base + int_mod + race_mod)
