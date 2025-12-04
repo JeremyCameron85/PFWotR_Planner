@@ -44,3 +44,9 @@ class Character:
             if feat_level and feat_stats and feat_feats:
                 feats_list.append(feat)
         return feats_list
+    
+    def skill_points_per_level(self) -> int:
+        base = self.char_class.get("skill_points", 0) if self.char_class else 0
+        int_mod = (self.stats["Int"] - 10) // 2
+        race_mod = self.race.get("skill_points_bonus", 0) if self.race else 0
+        return max(1, base + int_mod + race_mod)

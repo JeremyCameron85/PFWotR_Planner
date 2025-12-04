@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         self.skills_tab.update_skills_from_feats(self.character.feats)
 
     def on_background_changed(self):
-        self.skills_tab.update_skills(self.character.background)
+        self.skills_tab.update_skills_from_background(self.character.background)
         self.feats_tab.update_feats()
 
     def on_heritage_changed(self):

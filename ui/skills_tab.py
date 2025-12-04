@@ -8,10 +8,12 @@ class SkillsTab(QWidget):
 
     def __init__(self, character):
         super().__init__()
-        self.character = character
-        
+        self.character = character       
         layout = QVBoxLayout()
         self.setLayout(layout)
+        self.points_label = QLabel()
+        layout.addWidget(self.points_label)
+        self.update_skill_points()
         
         base_dir = Path(__file__).resolve().parent.parent
         skills_path = base_dir / "data" / "skills.json"
@@ -54,4 +56,23 @@ class SkillsTab(QWidget):
 
     def update_skill(self, skill_name, value):
         self.character.skills[skill_name] = value
+        self.skills_changed.emit()
+    
+    def update_skill_points(self):
+        points = self.character.skill_points_per_level()
+        self.points_label.setText(f"Skill Points {points}")
+
+    def update_skills_from_feats(self, feats):
+        for feat in feats:
+            for skill, bonus in feat.get("skill_modifiers", {}).items():
+                self.character.skills[skill] += bonus
+                self.skill_widgets[skill].setValue(self.character.skills[skill])
+            self.skills_changed.emit()
+
+    def update_skills_from_background(self, background):
+        if not background:
+            return
+        for skill, bonus in background.get("skill_modifiers", {}).items():
+            self.character.skills[skill] += bonus
+            self.skill_widgets[skill].setValue(self.character.skills[skill])
         self.skills_changed.emit()

@@ -90,4 +90,31 @@ class StatsTab(QWidget):
     def update_points_label(self):
         spent = self.total_points_spent()
         remaining = 25 - spent
-        self.points_label.setText(f"Points spent: {spent} / 25 (Remaining: {remaining})")
+        self.points_label.setText(f"Points {remaining}")
+
+    def apply_race_bonuses(self, race):
+        if not race:
+            return
+        
+        for stat, bonus in race.get("modifiers", {}).items():
+            self.character.stats[stat] += bonus
+            self.stat_widgets[stat].setValue(self.character.stats[stat])
+        self.update_points_label()
+        self.stats_changed.emit()
+
+    def apply_heritage_modifiers(self, heritage):
+        if not heritage:
+            return
+        for stat, bonus in heritage.get("modifiers", {}).items():
+            self.character.stats[stat] += bonus
+            self.stat_widgets[stat].setValue(self.character.stats[stat])
+        self.update_points_label()
+        self.stats_changed.emit()
+
+    def recalculate_modifiers(self, feats):
+        for feat in feats:
+            for stat, bonus in feat.get("modifiers", {}).items():
+                self.character.stats[stat] += bonus
+                self.stat_widgets[stat].setValue(self.character.stats[stat])
+            self.update_points_label()
+            self.stats_changed.emit()

@@ -35,16 +35,21 @@ class FeatsTab(QWidget):
     def update_feats(self):
         self.feat_combo.clear()
         available = self.character.available_feats(self.feats)
-        self.feat_combo.addItems([feat["name"] for feat in available])
+        
+        if available:
+            self.feat_combo.addItems([feat["name"] for feat in available])
+        else:
+            self.feat_combo.addItem("No feats available placeholder text")
 
     def add_selected_feat(self):
         selected_feat = self.feat_combo.currentText()
-        if selected_feat and selected_feat not in self.character.feats:
-            self.character.feats.append(selected_feat)
+        chosen_feat = next((feat for feat in self.feats if feat["name"] == selected_feat), None)
+        if chosen_feat and chosen_feat["name"] not in [feat["name"] for feat in self.character.feats]:
+            self.character.feats.append(chosen_feat)
             self.update_feats()
             self.refresh_selected_feats()
             self.feats_changed.emit()
 
     def refresh_selected_feats(self):
         self.selected_list.clear()
-        self.selected_list.addItems(self.character.feats)
+        self.selected_list.addItems([feat["name"] for feat in self.character.feats])
