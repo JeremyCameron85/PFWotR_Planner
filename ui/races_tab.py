@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_races
 import json
 
 class RaceTab(QWidget):
@@ -12,10 +13,7 @@ class RaceTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        base_dir = Path(__file__).resolve().parent.parent
-        races_path = base_dir / "data" / "races.json"
-        with races_path.open(encoding="utf-8") as races_file:
-            self.races = json.load(races_file)
+        self.races = load_races()
 
         layout.addWidget(QLabel("Select Race:"))
         self.race_combo = QComboBox()

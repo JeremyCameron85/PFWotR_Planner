@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_heritages
 import json
 
 class HeritageTab(QWidget):
@@ -12,10 +13,7 @@ class HeritageTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        base_dir = Path(__file__).resolve().parent.parent
-        heritages_path = base_dir / "data" / "heritages.json"
-        with heritages_path.open(encoding="utf-8") as heritages_file:
-            self.heritages = json.load(heritages_file)
+        self.heritages = load_heritages()
 
         layout.addWidget(QLabel("Select Heritage:"))
         self.heritage_combo = QComboBox()

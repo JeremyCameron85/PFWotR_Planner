@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_backgrounds
 import json
 
 class BackgroundTab(QWidget):
@@ -12,10 +13,7 @@ class BackgroundTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        base_dir = Path(__file__).resolve().parent.parent
-        backgrounds_path = base_dir / "data" / "backgrounds.json"
-        with backgrounds_path.open(encoding="utf-8") as backgrounds_file:
-            self.backgrounds = json.load(backgrounds_file)
+        self.backgrounds = load_backgrounds()
 
         layout.addWidget(QLabel("Select Background:"))
         self.background_combo = QComboBox()

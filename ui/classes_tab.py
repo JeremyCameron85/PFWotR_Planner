@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_classes
 import json
 
 class ClassTab(QWidget):
@@ -12,10 +13,7 @@ class ClassTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        base_dir = Path(__file__).resolve().parent.parent
-        classes_path = base_dir / "data" / "classes.json"
-        with classes_path.open(encoding="utf-8") as classes_file:
-            self.classes = json.load(classes_file)
+        self.classes = load_classes()
 
         layout.addWidget(QLabel("Select Class:"))
         self.class_combo = QComboBox()

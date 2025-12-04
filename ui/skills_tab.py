@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QGroupBox, QGridLayout
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_skills
 import json
 
 class SkillsTab(QWidget):
@@ -15,10 +16,7 @@ class SkillsTab(QWidget):
         layout.addWidget(self.points_label)
         self.update_skill_points()
         
-        base_dir = Path(__file__).resolve().parent.parent
-        skills_path = base_dir / "data" / "skills.json"
-        with skills_path.open(encoding="utf-8") as skills_file:
-            self.skills = json.load(skills_file)
+        self.skills = load_skills()
 
         skills_group = QGroupBox("Skills")
         skills_layout = QGridLayout()

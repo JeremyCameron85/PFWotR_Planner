@@ -1,8 +1,12 @@
+from wotr_planner.models.json_loader import load_classes, load_races
+
 class Character:
     def __init__(self, char_class=None, race=None):
+        classes = load_classes()
+        races = load_races()
         self.name = ""
-        self.race = race or {"skill_points_bonus": 0}
-        self.char_class = char_class or {"skill_points": 0}
+        self.race = race or next(r for r in races if r["name"] == "Human")
+        self.char_class = char_class or next(c for c in classes if c["name"] == "Fighter")
         self.heritage = None
         self.background = None
         self.level = 1
@@ -17,6 +21,7 @@ class Character:
         }
         self.base_stats = self.point_buy_stats.copy()
         self.stats = self.point_buy_stats.copy()
+
         self.skill_ranks = {
             "Athletics": 0,
             "Mobility": 0,
