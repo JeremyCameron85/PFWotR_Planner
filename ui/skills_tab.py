@@ -26,6 +26,7 @@ class SkillsTab(QWidget):
         layout.addWidget(skills_group)
 
         self.skill_widgets = {}
+        self.effective_labels = {}
 
         skills = [
             "Athletics",
@@ -45,34 +46,60 @@ class SkillsTab(QWidget):
         for skill in skills:
             skills_layout.addWidget(QLabel(skill), row, 0)
             spin = QSpinBox()
-            spin.setRange(0, 20)
-            spin.setValue(self.character.skills.get(skill, 0))
+            spin.setRange(0, self.character.level)
+            spin.setValue(self.character.skill_ranks.get(skill, 0))
             spin.valueChanged.connect(lambda value, s=skill: self.update_skill(s, value))
             skills_layout.addWidget(spin, row, 1)
             self.skill_widgets[skill] = spin
+            effective_label = QLabel(str(self.character.skills.get(skill, 0)))
+            skills_layout.addWidget(effective_label, row, 2)
+            self.effective_labels[skill] = effective_label
             row += 1
 
         layout.addWidget(skills_group)
 
-    def update_skill(self, skill_name, value):
-        self.character.skills[skill_name] = value
+    def update_skill(self, skill_name, new_value):
+        old_value = self.character.skill_ranks.get(skill_name, 0)
+        delta = new_value - old_value
+        if delta > self.character.unspent_skill_points_value:
+            spin = self.skill_widgets[skill_name]
+            spin.blockSignals(True)
+            spin.setValue(old_value)
+            spin.blockSignals(False)
+            return
+        
+        if new_value > self.character.level:
+            spin = self.skill_widgets[skill_name]
+            spin.blockSignals(True)
+            spin.setValue(self.character.level)
+            spin.blockSignals(False)
+            self.skills_changed.emit()
+            return
+        
+        self.character.skill_ranks[skill_name] = new_value
+        self.character.unspent_skill_points_value -= delta
+        self.recalculate_effective_skills()
+        self.update_skill_points()
         self.skills_changed.emit()
     
     def update_skill_points(self):
-        points = self.character.skill_points_per_level()
+        points = self.character.unspent_skill_points_value
         self.points_label.setText(f"Skill Points {points}")
 
-    def update_skills_from_feats(self, feats):
-        for feat in feats:
+    def recalculate_effective_skills(self):
+        self.character.skills = self.character.skill_ranks.copy()
+        for feat in self.character.feats:
             for skill, bonus in feat.get("skill_modifiers", {}).items():
-                self.character.skills[skill] += bonus
-                self.skill_widgets[skill].setValue(self.character.skills[skill])
-            self.skills_changed.emit()
+                self.character.skills[skill] = self.character.skills.get(skill, 0) + bonus
 
-    def update_skills_from_background(self, background):
-        if not background:
-            return
-        for skill, bonus in background.get("skill_modifiers", {}).items():
-            self.character.skills[skill] += bonus
-            self.skill_widgets[skill].setValue(self.character.skills[skill])
-        self.skills_changed.emit()
+        if self.character.background:
+            for skill, bonus in self.character.background.get("skill_modifiers", {}).items():
+                self.character.skills[skill] = self.character.skills.get(skill, 0) + bonus
+
+        for skill, label in self.effective_labels.items():
+            label.setText(str(self.character.skills.get(skill, 0)))
+
+    def apply_level_up(self, new_level):
+        self.character.level = new_level
+        for skill, spin in self.skill_widgets.items():
+            spin.setRange(0, self.character.level)

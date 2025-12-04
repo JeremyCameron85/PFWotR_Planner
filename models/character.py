@@ -17,7 +17,7 @@ class Character:
         }
         self.base_stats = self.point_buy_stats.copy()
         self.stats = self.point_buy_stats.copy()
-        self.skills = {
+        self.skill_ranks = {
             "Athletics": 0,
             "Mobility": 0,
             "Trickery": 0,
@@ -30,9 +30,12 @@ class Character:
             "Persuasion": 0,
             "Use Magic Device": 0
         }
+        self.skills = self.skill_ranks.copy()
+        self.unspent_skill_points_value = self.skill_points_per_level()
 
     def level_up(self):
         self.level += 1
+        self.unspent_skill_points_value += self.skill_points_per_level()
 
     def available_feats(self, all_feats):
         feats_list = []
@@ -48,7 +51,7 @@ class Character:
 
             if feat_level and feat_stats and feat_feats:
                 feats_list.append(feat)
-                
+
         return feats_list
     
     def skill_points_per_level(self) -> int:
