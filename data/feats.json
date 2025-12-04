@@ -10,11 +10,5 @@
         "prerequisite_level": 1,
         "prerequisite_stats": {},
         "prerequisite_feats":["Power Attack"]
-    },
-    {
-        "name": "",
-        "prerequisite_level": 1,
-        "prerequisite_stats": {},
-        "prerequisite_feats":[]
     }
 ]

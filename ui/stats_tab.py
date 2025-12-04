@@ -44,11 +44,11 @@ class StatsTab(QWidget):
         layout.addWidget(stats_group)
 
     def update_stat(self, stat_name, value):
-        old_value = self.character.stats[stat_name]
-        self.character.stats[stat_name] = value
+        old_value = self.character.point_buy_stats[stat_name]
+        self.character.point_buy_stats[stat_name] = value
 
         if self.total_points_spent() > 25:
-            self.character.stats[stat_name] = old_value
+            self.character.point_buy_stats[stat_name] = old_value
             self.stat_widgets[stat_name].setValue(old_value)
             return
 
@@ -101,7 +101,7 @@ class StatsTab(QWidget):
         self.recalculate_modifiers(self.character.feats)
 
     def recalculate_modifiers(self, feats):
-        self.character.stats = self.character.base_stats.copy()
+        self.character.stats = self.character.point_buy_stats.copy()
         if self.character.race:
             for stat, bonus in self.character.race.get("modifiers", {}).items():
                 self.character.stats[stat] += bonus
