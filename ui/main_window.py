@@ -27,12 +27,12 @@ class MainWindow(QMainWindow):
         self.skills_tab = SkillsTab(self.character)
         self.feats_tab = FeatsTab(self.character)
 
-        self.stats_tab.stats_changed.connect(self.feats_tab.update_feats)
-        self.races_tab.race_changed.connect(self.on_race_changed)
         self.classes_tab.class_changed.connect(self.on_class_changed)
-        self.feats_tab.feats_changed.connect(self.on_feats_changed)
+        self.races_tab.race_changed.connect(self.on_race_changed)
         self.background_tab.background_changed.connect(self.on_background_changed)
         self.heritage_tab.heritage_changed.connect(self.on_heritage_changed)
+        self.stats_tab.stats_changed.connect(self.feats_tab.update_feats)
+        self.feats_tab.feats_changed.connect(self.on_feats_changed)
 
         self.tabs.addTab(self.classes_tab, "Class")
         self.tabs.addTab(self.races_tab, "Race")

@@ -49,11 +49,13 @@ class StatsTab(QWidget):
 
         if self.total_points_spent() > 25:
             self.character.point_buy_stats[stat_name] = old_value
-            self.stat_widgets[stat_name].setValue(old_value)
+            spin = self.stat_widgets[stat_name]
+            spin.blockSignals(True)
+            spin.setValue(old_value)
+            spin.blockSignals(False)
             return
 
-        self.update_points_label()
-        self.stats_changed.emit()
+        self.recalculate_modifiers(self.character.feats)
 
     @staticmethod
     def point_cost(value: int) -> int:
@@ -85,7 +87,7 @@ class StatsTab(QWidget):
         return 0
     
     def total_points_spent(self) -> int:
-        return sum(self.point_cost(val) for val in self.character.stats.values())
+        return sum(self.point_cost(val) for val in self.character.point_buy_stats.values())
     
     def update_points_label(self):
         spent = self.total_points_spent()
@@ -115,7 +117,9 @@ class StatsTab(QWidget):
                 self.character.stats[stat] += bonus
         
         for stat, spin in self.stat_widgets.items():
+            spin.blockSignals(True)
             spin.setValue(self.character.stats[stat])
+            spin.blockSignals(False)
 
         self.update_points_label()
         self.stats_changed.emit()
