@@ -93,28 +93,29 @@ class StatsTab(QWidget):
         self.points_label.setText(f"Points {remaining}")
 
     def apply_race_bonuses(self, race):
-        if not race:
-            return
-        
-        for stat, bonus in race.get("modifiers", {}).items():
-            self.character.stats[stat] += bonus
-            self.stat_widgets[stat].setValue(self.character.stats[stat])
-        self.update_points_label()
-        self.stats_changed.emit()
+        self.character.race = race
+        self.recalculate_modifiers(self.character.feats)
 
     def apply_heritage_modifiers(self, heritage):
-        if not heritage:
-            return
-        for stat, bonus in heritage.get("modifiers", {}).items():
-            self.character.stats[stat] += bonus
-            self.stat_widgets[stat].setValue(self.character.stats[stat])
-        self.update_points_label()
-        self.stats_changed.emit()
+        self.character.heritage = heritage
+        self.recalculate_modifiers(self.character.feats)
 
     def recalculate_modifiers(self, feats):
+        self.character.stats = self.character.base_stats.copy()
+        if self.character.race:
+            for stat, bonus in self.character.race.get("modifiers", {}).items():
+                self.character.stats[stat] += bonus
+
+        if self.character.heritage:
+            for stat, bonus in self.character.heritage.get("modifiers", {}).items():
+                self.character.stats[stat] += bonus
+
         for feat in feats:
             for stat, bonus in feat.get("modifiers", {}).items():
                 self.character.stats[stat] += bonus
-                self.stat_widgets[stat].setValue(self.character.stats[stat])
-            self.update_points_label()
-            self.stats_changed.emit()
+        
+        for stat, spin in self.stat_widgets.items():
+            spin.setValue(self.character.stats[stat])
+
+        self.update_points_label()
+        self.stats_changed.emit()

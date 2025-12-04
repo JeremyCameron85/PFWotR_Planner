@@ -23,11 +23,16 @@ class HeritageTab(QWidget):
         layout.addWidget(self.heritage_combo)
 
         if getattr(self.character, "heritage", None):
-            idx = next((i for i, h in enumerate(self.heritages) if h["name"] == self.character.heritage), 0)
+            idx = next(
+                (i for i, h in enumerate(self.heritages)
+                 if h["name"] == self.character.heritage),
+                 0
+            )
             self.heritage_combo.setCurrentIndex(idx)
+
         self.heritage_combo.currentIndexChanged.connect(self.update_heritage)
 
     def update_heritage(self, index):
         selected_heritage = self.heritages[index]
-        self.character.heritage = selected_heritage["name"]
+        self.character.heritage = selected_heritage
         self.heritage_changed.emit()

@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
 
     def on_class_changed(self):
         self.feats_tab.update_feats()
+        self.skills_tab.update_skill_points()
 
     def on_feats_changed(self):
         self.stats_tab.recalculate_modifiers(self.character.feats)

@@ -5,7 +5,7 @@ class Character:
         self.char_class = None
         self.level = 1
         self.feats = []
-        self.stats = {
+        self.base_stats = {
             "Str":10,
             "Dex":10, 
             "Con":10, 
@@ -13,6 +13,7 @@ class Character:
             "Wis":10, 
             "Cha":10
         }
+        self.stats = self.base_stats.copy()
         self.skills = {
             "Athletics": 0,
             "Mobility": 0,

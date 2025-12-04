@@ -23,12 +23,16 @@ class ClassTab(QWidget):
         layout.addWidget(self.class_combo)
 
         if getattr(self.character, "char_class", None):
-            idx = next((i for i, c in enumerate(self.classes) if c["name"] == self.character.char_class), 0)
+            idx = next(
+                (i for i, c in enumerate(self.classes)
+                 if c["name"] == self.character.char_class.get("name")),
+                 0
+            )
             self.class_combo.setCurrentIndex(idx)
 
         self.class_combo.currentIndexChanged.connect(self.update_class)
 
     def update_class(self, index):
         selected_class = self.classes[index]
-        self.character.char_class = selected_class["name"]
+        self.character.char_class = selected_class
         self.class_changed.emit()

@@ -1,5 +1,41 @@
 [
-    {"name": "Human"},
-    {"name": "Elf"},
-    {"name": "Dwarf"}
+    {
+        "name": "Human",
+        "skill_points_bonus": 1,
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Bonus Feat", "Extra Skill Point"]
+    },
+    {
+        "name": "Elf",
+        "skill_points_bonus": 0,
+        "modifiers": {
+            "Str": 0,
+            "Dex": 2,
+            "Con": -2,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Keen Senses", "Fey Ancestry"]
+    },
+    {
+        "name": "Dwarf",
+        "skill_points_bonus": 0,
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 2,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": -2
+        },
+        "traits": ["Darkvision", "Dwarven Resilience"]
+    }
 ]

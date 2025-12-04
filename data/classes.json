@@ -1,5 +1,65 @@
 [
-    {"name": "Fighter"},
-    {"name": "Wizard"},
-    {"name": "Cleric"}
+    {
+        "name": "Fighter",
+        "hit_die": 10,
+        "skill_points": 2,
+        "base_attack_bonus": "High",
+        "saving_throws": {
+            "Fortitude": "Good",
+            "Reflex": "Poor",
+            "Will": "Poor"
+        },
+        "class_skills": ["Athletics", "Mobility", "Perception"],
+        "proficiencies": [],
+        "archetypes": [
+            {
+                "name": "Tower Shield Specialist",
+                "modifiers": {
+                    "class_skills": ["Athletics", "Mobility"],
+                    "proficiencies": ["Tower Shield Proficiency"]
+                },
+                "features_removed": [],
+                "features_added": []
+            }
+        ]
+    },
+    {
+        "name": "Wizard",
+        "hit_die": 6,
+        "skill_points": 2,
+        "base_attack_bonus": "Poor",
+        "saving_throws": {
+            "Fortitude": "Poor",
+            "Reflex": "Poor",
+            "Will": "Good"
+        },
+        "class_skills": ["Knowledge(Arcana)", "Knowledge(World)", "Use Magic Device"],
+        "proficiencies": []
+    },
+    {
+        "name": "Rogue",
+        "hit_die": 8,
+        "skill_points": 8,
+        "base_attack_bonus": "Medium",
+        "saving_throws": {
+            "Fortitude": "Poor",
+            "Reflex": "Good",
+            "Will": "Poor"
+        },
+        "class_skills": ["Stealth", "Mobility", "Trickery"],
+        "proficiencies": []
+    },
+    {
+        "name": "Cleric",
+        "hit_die": 8,
+        "skill_points": 2,
+        "base_attack_bonus": "Medium",
+        "saving_throws": {
+            "Fortitude": "Good",
+            "Reflex": "Poor",
+            "Will": "Good"
+        },
+        "class_skills": ["Lore(Religion)"],
+        "proficiencies": []
+    }
 ]

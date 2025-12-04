@@ -19,16 +19,20 @@ class BackgroundTab(QWidget):
 
         layout.addWidget(QLabel("Select Background:"))
         self.background_combo = QComboBox()
-        self.background_combo.addItems([background["name"] for background in self.backgrounds])
+        self.background_combo.addItems([bg["name"] for bg in self.backgrounds])
         layout.addWidget(self.background_combo)
 
         if getattr(self.character, "background", None):
-            idx = next((i for i, b in enumerate(self.backgrounds) if b["name"] == self.character.background), 0)
+            idx = next(
+                (i for i, b in enumerate(self.backgrounds)
+                 if b["name"] == self.character.background.get("name")),
+                 0
+            )
             self.background_combo.setCurrentIndex(idx)
 
         self.background_combo.currentIndexChanged.connect(self.update_background)
 
     def update_background(self, index):
         selected_background = self.backgrounds[index]
-        self.character.background = selected_background["name"]
+        self.character.background = selected_background
         self.background_changed.emit()
