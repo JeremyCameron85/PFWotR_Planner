@@ -1,8 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QGroupBox, QGridLayout
 from PyQt6.QtCore import pyqtSignal
-from pathlib import Path
 from wotr_planner.models.json_loader import load_skills
-import json
 
 class SkillsTab(QWidget):
     skills_changed = pyqtSignal()
@@ -15,14 +13,11 @@ class SkillsTab(QWidget):
         self.points_label = QLabel()
         layout.addWidget(self.points_label)
         self.update_skill_points()
-        
         self.skills = load_skills()
-
         skills_group = QGroupBox("Skills")
         skills_layout = QGridLayout()
         skills_group.setLayout(skills_layout)
         layout.addWidget(skills_group)
-
         self.skill_widgets = {}
         self.effective_labels = {}
 
@@ -59,7 +54,7 @@ class SkillsTab(QWidget):
     def update_skill(self, skill_name, new_value):
         old_value = self.character.skill_ranks.get(skill_name, 0)
         delta = new_value - old_value
-        if delta > self.character.unspent_skill_points_value:
+        if delta > self.skill_points_pool():
             spin = self.skill_widgets[skill_name]
             spin.blockSignals(True)
             spin.setValue(old_value)
@@ -75,14 +70,16 @@ class SkillsTab(QWidget):
             return
         
         self.character.skill_ranks[skill_name] = new_value
-        self.character.unspent_skill_points_value -= delta
         self.recalculate_effective_skills()
         self.update_skill_points()
         self.skills_changed.emit()
     
     def update_skill_points(self):
-        points = self.character.unspent_skill_points_value
+        points = self.skill_points_pool()
         self.points_label.setText(f"Skill Points {points}")
+
+    def skill_points_pool(self):
+        return self.character.level * self.character.skill_points_per_level() - sum(self.character.skill_ranks.values())
 
     def recalculate_effective_skills(self):
         self.character.skills = self.character.skill_ranks.copy()
@@ -101,3 +98,4 @@ class SkillsTab(QWidget):
         self.character.level = new_level
         for skill, spin in self.skill_widgets.items():
             spin.setRange(0, self.character.level)
+        self.update_skill_points()

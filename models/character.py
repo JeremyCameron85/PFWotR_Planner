@@ -36,12 +36,10 @@ class Character:
             "Use Magic Device": 0
         }
         self.skills = self.skill_ranks.copy()
-        self.unspent_skill_points_value = self.skill_points_per_level()
 
     def level_up(self):
         self.level += 1
-        self.unspent_skill_points_value += self.skill_points_per_level()
-
+    
     def available_feats(self, all_feats):
         feats_list = []
         chosen_feat_names = [f["name"] for f in self.feats]
