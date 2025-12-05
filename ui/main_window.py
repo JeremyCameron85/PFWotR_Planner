@@ -45,14 +45,16 @@ class MainWindow(QMainWindow):
     def on_race_changed(self):
         self.stats_tab.apply_race_bonuses(self.character.race)
         self.feats_tab.update_feats()
+        self.skills_tab.enforce_skill_point_limit()
 
     def on_class_changed(self):
         self.feats_tab.update_feats()
-        self.skills_tab.update_skill_points()
+        self.skills_tab.enforce_skill_point_limit()
 
     def on_feats_changed(self):
         self.stats_tab.recalculate_modifiers(self.character.feats)
         self.skills_tab.update_skills_from_feats(self.character.feats)
+        self.skills_tab.enforce_skill_point_limit()
 
     def on_background_changed(self):
         self.skills_tab.update_skills_from_background(self.character.background)

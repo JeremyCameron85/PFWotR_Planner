@@ -99,3 +99,27 @@ class SkillsTab(QWidget):
         for skill, spin in self.skill_widgets.items():
             spin.setRange(0, self.character.level)
         self.update_skill_points()
+
+    def enforce_skill_point_limit(self):
+        allowed = self.character.level * self.character.skill_points_per_level()
+        spent = sum(self.character.skill_ranks.values())
+        if spent <= allowed:
+            return
+        
+        skills_sorted = sorted(
+            self.character.skill_ranks.items(),
+            key=lambda item: (item[1], item[0])
+        )
+
+        for skill, rank in skills_sorted:
+            while spent > allowed and self.character.skill_ranks[skill] > 0:
+                self.character.skill_ranks[skill] -= 1
+                spent -= 1
+
+        for skill, spin in self.skill_widgets.items():
+            spin.blockSignals(True)
+            spin.setValue(self.character.skill_ranks[skill])
+            spin.blockSignals(False)
+
+        self.recalculate_effective_skills()
+        self.update_skill_points()
