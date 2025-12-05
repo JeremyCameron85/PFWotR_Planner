@@ -106,12 +106,9 @@ class SkillsTab(QWidget):
         if spent <= allowed:
             return
         
-        skills_sorted = sorted(
-            self.character.skill_ranks.items(),
-            key=lambda item: (item[1], item[0])
-        )
+        skills_sorted = list(reversed(self.skill_widgets.keys()))
 
-        for skill, rank in skills_sorted:
+        for skill in skills_sorted:
             while spent > allowed and self.character.skill_ranks[skill] > 0:
                 self.character.skill_ranks[skill] -= 1
                 spent -= 1

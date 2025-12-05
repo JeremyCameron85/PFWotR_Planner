@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         self.races_tab.race_changed.connect(self.on_race_changed)
         self.background_tab.background_changed.connect(self.on_background_changed)
         self.heritage_tab.heritage_changed.connect(self.on_heritage_changed)
-        self.stats_tab.stats_changed.connect(self.feats_tab.update_feats)
+        self.stats_tab.stats_changed.connect(self.on_stats_changed)
         self.feats_tab.feats_changed.connect(self.on_feats_changed)
 
         self.tabs.addTab(self.classes_tab, "Class")
@@ -46,15 +46,18 @@ class MainWindow(QMainWindow):
         self.stats_tab.apply_race_bonuses(self.character.race)
         self.feats_tab.update_feats()
         self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
 
     def on_class_changed(self):
         self.feats_tab.update_feats()
         self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
 
     def on_feats_changed(self):
         self.stats_tab.recalculate_modifiers(self.character.feats)
         self.skills_tab.update_skills_from_feats(self.character.feats)
         self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
 
     def on_background_changed(self):
         self.skills_tab.update_skills_from_background(self.character.background)
@@ -63,3 +66,8 @@ class MainWindow(QMainWindow):
     def on_heritage_changed(self):
         self.stats_tab.apply_heritage_modifiers(self.character.heritage)
         self.feats_tab.update_feats()
+
+    def on_stats_changed(self):
+        self.feats_tab.update_feats()
+        self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
