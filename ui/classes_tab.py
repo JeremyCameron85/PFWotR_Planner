@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEditor
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit
 from PyQt6.QtCore import pyqtSignal
 from wotr_planner.models.json_loader import load_classes
 
