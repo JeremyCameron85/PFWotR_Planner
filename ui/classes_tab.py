@@ -18,7 +18,7 @@ class ClassTab(QWidget):
         self.class_tree.setHeaderHidden(True)
         layout.addWidget(self.class_tree)
 
-        self.description_box = QTextEditor()
+        self.description_box = QTextEdit()
         self.description_box.setReadOnly(True)
         layout.addWidget(self.description_box, stretch=1)
 
