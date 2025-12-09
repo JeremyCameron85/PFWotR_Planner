@@ -55,13 +55,15 @@ class MainWindow(QMainWindow):
 
     def on_feats_changed(self):
         self.stats_tab.recalculate_modifiers(self.character.feats)
-        self.skills_tab.update_skills_from_feats(self.character.feats)
+        self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()
 
     def on_background_changed(self):
-        self.skills_tab.update_skills_from_background(self.character.background)
         self.feats_tab.update_feats()
+        self.skills_tab.recalculate_effective_skills()
+        self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
 
     def on_heritage_changed(self):
         self.stats_tab.apply_heritage_modifiers(self.character.heritage)
