@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QListWidget, QPushButton
 from PyQt6.QtCore import pyqtSignal
 from pathlib import Path
+from wotr_planner.models.json_loader import load_feats
 import json
 
 class FeatsTab(QWidget):
@@ -12,10 +13,7 @@ class FeatsTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        base_dir = Path(__file__).resolve().parent.parent
-        feats_path = base_dir / "data" / "feats.json"
-        with feats_path.open(encoding="utf-8") as feats_file:
-            self.feats = json.load(feats_file)
+        self.feats = load_feats()
 
         layout.addWidget(QLabel("Select Feat:"))
         self.feat_combo = QComboBox()
@@ -28,6 +26,10 @@ class FeatsTab(QWidget):
         layout.addWidget(QLabel("Selected Feats:"))
         self.selected_list = QListWidget()
         layout.addWidget(self.selected_list)
+
+        self.remove_button = QPushButton("Remove Feat")
+        layout.addWidget(self.remove_button)
+        self.remove_button.clicked.connect(self.remove_selected_feat)
 
         self.update_feats()
         self.refresh_selected_feats()
@@ -50,6 +52,16 @@ class FeatsTab(QWidget):
             self.refresh_selected_feats()
             self.feats_changed.emit()
 
+    def remove_selected_feat(self):
+        selected_items = self.selected_list.selectedItems()
+        if not selected_items:
+            return
+        feat_name = selected_items[0].text()
+        self.character.feats = [f for f in self.character.feats if f["name"] != feat_name]
+        self.update_feats()
+        self.refresh_selected_feats()
+        self.feats_changed.emit()
+        
     def refresh_selected_feats(self):
         self.selected_list.clear()
         self.selected_list.addItems([feat["name"] for feat in self.character.feats])

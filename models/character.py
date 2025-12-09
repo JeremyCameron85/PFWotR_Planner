@@ -62,3 +62,10 @@ class Character:
         int_mod = (self.stats["Int"] - 10) // 2
         race_mod = self.race.get("skill_points_bonus", 0)
         return max(1, base + int_mod + race_mod)
+    
+    def remove_feat(self, feat_name: str):
+        for feat in self.feats:
+            if feat["name"] == feat_name:
+                self.feats.remove(feat)
+                return True
+        return False

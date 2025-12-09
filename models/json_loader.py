@@ -30,3 +30,9 @@ def load_backgrounds():
     backgrounds_path = base_dir / "data" / "backgrounds.json"
     with backgrounds_path.open(encoding="utf-8") as backgrounds_file:
         return json.load(backgrounds_file)
+    
+def load_feats():
+    base_dir = Path(__file__).resolve().parent.parent
+    feats_path = base_dir / "data" / "feats.json"
+    with feats_path.open(encoding="utf-8") as feats_file:
+        return json.load(feats_file)
