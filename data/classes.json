@@ -13,10 +13,61 @@
         "proficiencies": [],
         "archetypes": [
             {
+                "name": "Aldori Defender",
+                "description": "The Aldori Defender is a master of the Aldori dueling sword, specializing in defensive combat techniques that allow them to parry and counterattack with precision.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Armiger",
+                "description": "The Armiger is a skilled warrior who specializes in the use of heavy armor and shields, excelling in defensive tactics and battlefield control.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Dragonheir Scion",
+                "description": "The Dragonheir Scion is a fighter with draconic heritage, granting them unique abilities and resilience in combat, often channeling the power of their dragon ancestors.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Mutation Warrior",
+                "description": "The Mutation Warrior embraces biological mutations to enhance their combat abilities, gaining unique physical traits that provide advantages in battle.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
                 "name": "Tower Shield Specialist",
+                "description": "The Tower Shield Specialist is adept at using tower shields to provide exceptional defense for themselves and their allies, mastering techniques that turn the shield into a formidable weapon.",
                 "modifiers": {
                     "class_skills": ["Athletics", "Mobility"],
                     "proficiencies": ["Tower Shield Proficiency"]
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Two-Handed Fighter",
+                "description": "The Two-Handed Fighter focuses on wielding large, two-handed weapons to deliver powerful strikes, sacrificing some defense for increased offensive capabilities.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
                 },
                 "features_removed": [],
                 "features_added": []
@@ -34,7 +85,19 @@
             "Will": "Good"
         },
         "class_skills": ["Knowledge(Arcana)", "Knowledge(World)", "Use Magic Device"],
-        "proficiencies": []
+        "proficiencies": [],
+        "archetypes": [
+            {
+                "name": "School Specialist",
+                "description": "The School Specialist focuses on a specific school of magic, gaining enhanced abilities and spells related to that school while sacrificing access to some other schools.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            }
+        ]
     },
     {
         "name": "Rogue",
