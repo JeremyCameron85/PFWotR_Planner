@@ -69,3 +69,33 @@ class Character:
                 self.feats.remove(feat)
                 return True
         return False
+    
+    def validate_feats(self, all_feats):
+        removed = set()
+        changed = True
+        while changed:
+            changed = False
+            for feat in list(self.feats):
+                full_def = next((f  for f in all_feats if f["name"] == feat["name"]), None)
+                if not full_def:
+                    continue
+
+                if self.level < full_def.get("prerequisite_level", 1):
+                    self.feats.remove(feat)
+                    removed.add(feat["name"])
+                    changed = True
+                    continue
+
+                for stat, value in full_def.get("prerequisite_stats", {}).items():
+                    if self.stats.get(stat, 0) < value:
+                        self.feats.remove(feat)
+                        removed.add(feat["name"])
+                        changed = True
+                        break
+
+                for prereq in full_def.get("prerequisite_feats", []):
+                    if prereq not in [f["name"] for f in self.feats]:
+                        self.feats.remove(feat)
+                        removed.add(feat["name"])
+                        changed = True
+                        break

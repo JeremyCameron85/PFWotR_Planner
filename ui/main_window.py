@@ -44,12 +44,18 @@ class MainWindow(QMainWindow):
 
     def on_race_changed(self):
         self.stats_tab.apply_race_bonuses(self.character.race)
+        self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
+        self.feats_tab.refresh_selected_feats()
+        self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()
 
     def on_class_changed(self):
+        self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
+        self.feats_tab.refresh_selected_feats()
+        self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()
 
@@ -67,9 +73,17 @@ class MainWindow(QMainWindow):
 
     def on_heritage_changed(self):
         self.stats_tab.apply_heritage_modifiers(self.character.heritage)
+        self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
+        self.feats_tab.refresh_selected_feats()
+        self.skills_tab.recalculate_effective_skills()
+        self.skills_tab.enforce_skill_point_limit()
+        self.skills_tab.update_skill_points()
 
     def on_stats_changed(self):
+        self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
+        self.feats_tab.refresh_selected_feats()
+        self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()

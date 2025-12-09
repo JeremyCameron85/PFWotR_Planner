@@ -72,18 +72,7 @@ class FeatsTab(QWidget):
             return
         
         feat_name = selected_items[0].text()
-        self.character.feats = [f for f in self.character.feats if f["name"] != feat_name]
-        removed = {feat_name}
-        changed = True
-        while changed:
-            changed = False
-            for feat in list(self.character.feats):
-                prereqs = feat.get("prerequisite_feats",  [])
-                if any(req  in removed for req in prereqs):
-                    self.character.feats.remove(feat)
-                    removed.add(feat["name"])
-                    changed = True
-                    
+        self.character.remove_feat(feat_name)
         self.update_feats()
         self.refresh_selected_feats()
         self.feats_changed.emit()
