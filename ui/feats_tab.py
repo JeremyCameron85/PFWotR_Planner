@@ -1,8 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QListWidget, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QListWidget, QPushButton, QTextEdit
 from PyQt6.QtCore import pyqtSignal
-from pathlib import Path
 from wotr_planner.models.json_loader import load_feats
-import json
 
 class FeatsTab(QWidget):
     feats_changed = pyqtSignal()
@@ -18,6 +16,11 @@ class FeatsTab(QWidget):
         layout.addWidget(QLabel("Select Feat:"))
         self.feat_combo = QComboBox()
         layout.addWidget(self.feat_combo)
+        self.feat_combo.currentIndexChanged.connect(self.show_feat_description)
+
+        self.description_box = QTextEdit()
+        self.description_box.setReadOnly(True)
+        layout.addWidget(self.description_box, stretch=1)
 
         self.add_button = QPushButton("Add Feat")
         layout.addWidget(self.add_button)
@@ -26,6 +29,7 @@ class FeatsTab(QWidget):
         layout.addWidget(QLabel("Selected Feats:"))
         self.selected_list = QListWidget()
         layout.addWidget(self.selected_list)
+        self.selected_list.itemClicked.connect(self.show_selected_feat_description)
 
         self.remove_button = QPushButton("Remove Feat")
         layout.addWidget(self.remove_button)
@@ -33,6 +37,18 @@ class FeatsTab(QWidget):
 
         self.update_feats()
         self.refresh_selected_feats()
+
+    def show_feat_description(self):
+        selected_feat = self.feat_combo.currentText()
+        feat = next((f for f in self.feats if f["name"] == selected_feat), None)
+        if feat:
+            self.description_box.setPlainText(feat.get("description", "No description available."))
+
+    def show_selected_feat_description(self, item):
+        feat_name = item.text()
+        feat = next((f for f in self.feats if f["name"] == feat_name), None)
+        if feat:
+            self.description_box.setPlainText(feat.get("description", "No description available."))
 
     def update_feats(self):
         self.feat_combo.clear()

@@ -3,12 +3,14 @@
         "name": "Power Attack",
         "prerequisite_level": 1,
         "prerequisite_stats": {"Str": 13},
-        "prerequisite_feats":[]
+        "prerequisite_feats":[],
+        "description": "Placeholder description for Power Attack."
     },
     {
         "name": "Cleave",
         "prerequisite_level": 1,
         "prerequisite_stats": {},
-        "prerequisite_feats":["Power Attack"]
+        "prerequisite_feats":["Power Attack"],
+        "description": "Placeholder description for Cleave."
     }
 ]
