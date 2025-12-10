@@ -1,17 +1,23 @@
 [
     {
         "name": "Fighter",
-        "hit_die": 10,
+        "base_hp": 10,
+        "hp_per_level": 6,
         "skill_points": 2,
         "bonus_feat_interval": 2,
+        "bonus_feats": [1],
         "base_attack_bonus": "High",
         "saving_throws": {
-            "Fortitude": "Good",
-            "Reflex": "Poor",
-            "Will": "Poor"
+            "Fortitude": "High",
+            "Reflex": "Low",
+            "Will": "Low"
         },
         "class_skills": ["Athletics", "Mobility", "Perception"],
-        "proficiencies": [],
+        "proficiencies": ["Armor Proficiency (Light Armor)", "Armor Proficiency (Medium Armor)", "Armor Proficiency (Heavy Armor)", "Shield Proficiency", "Simple Weapon Proficiency", "Martial Weapons Proficiency", "Tower Shield Proficiency"],
+        "class_feats": [
+            { "Armed Bravery": 2 },
+            {}
+        ],
         "description": "Fighters are versatile warriors skilled in the use of a variety of weapons and armor. They excel in combat, able to adapt to different fighting styles and situations.",
         "archetypes": [
             {
@@ -78,7 +84,7 @@
     },
     {
         "name": "Wizard",
-        "hit_die": 6,
+        "base_hp": 6,
         "skill_points": 2,
         "bonus_feat_interval": 0,
         "base_attack_bonus": "Poor",
@@ -105,7 +111,7 @@
     },
     {
         "name": "Rogue",
-        "hit_die": 8,
+        "base_hp": 8,
         "skill_points": 8,
         "bonus_feat_interval": 0,
         "base_attack_bonus": "Medium",
@@ -132,7 +138,7 @@
     },
     {
         "name": "Cleric",
-        "hit_die": 8,
+        "base_hp": 8,
         "skill_points": 2,
         "bonus_feat_interval": 0,
         "base_attack_bonus": "Medium",
