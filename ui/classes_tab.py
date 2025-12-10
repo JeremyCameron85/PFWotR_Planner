@@ -82,9 +82,7 @@ class ClassTab(QWidget):
             cls = item.data(0, 1) # Get class data
             self.character.char_class = cls
             self.character.archetype = None
-            self.description_box.setPlainText(
-                f"{cls['name']} (Hit Die: d{cls['hit_die']}, Skill Points: {cls['skill_points']})"
-            )
+            self.description_box.setPlainText(cls.get("description", "No description available."))
         else:
             # Selected item is an archetype
             arch = item.data(0, 1) # Get archetype data

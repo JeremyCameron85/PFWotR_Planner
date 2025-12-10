@@ -18,7 +18,7 @@
             { "Armed Bravery": 2 },
             {}
         ],
-        "description": "Fighters are versatile warriors skilled in the use of a variety of weapons and armor. They excel in combat, able to adapt to different fighting styles and situations.",
+        "description": "Fighters excel at combat - defeating their enemies, controlling the flow of battle, and surviving such sorties themselves. While their specific weapon and methods grant them a wide variety of tactics, few can match fighters for sheer battle prowess",
         "archetypes": [
             {
                 "name": "Aldori Defender",
@@ -85,21 +85,92 @@
     {
         "name": "Wizard",
         "base_hp": 6,
+        "hp_per_level": 4,
         "skill_points": 2,
         "bonus_feat_interval": 0,
-        "base_attack_bonus": "Poor",
+        "base_attack_bonus": "Low",
         "saving_throws": {
-            "Fortitude": "Poor",
-            "Reflex": "Poor",
-            "Will": "Good"
+            "Fortitude": "Low",
+            "Reflex": "Low",
+            "Will": "High"
         },
         "class_skills": ["Knowledge(Arcana)", "Knowledge(World)", "Use Magic Device"],
         "proficiencies": [],
-        "description": "Wizards are masters of arcane magic, capable of casting powerful spells to manipulate the world around them. They rely on their intelligence and extensive study to unlock magical secrets.",
+        "description": "While universalist wizards might study  to prepare themselves for any manner of danger, specialist wizards research schools of magic that make them exceptionally skilled within a specific focus. Yet no matter their speciality, all wizards are masters of the impossible and can aid their allies in overcoming any danger.",
         "archetypes": [
             {
-                "name": "School Specialist",
-                "description": "The School Specialist focuses on a specific school of magic, gaining enhanced abilities and spells related to that school while sacrificing access to some other schools.",
+                "name": "Arcane Bomber",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Cruoromancer",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Elemental Specialist",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Exploiter Wizard",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Scroll Savant",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Shadowcaster",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Spell Master",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Thassilonian Specialist",
+                "description": "To many  wizards, the experimentation of the alchemist seems quaint, if not dangerous or frightening. A few wizards take up the secrets of the bomb, however, fusing alchemy with their already considerable magical power.",
                 "modifiers": {
                     "class_skills": [""],
                     "proficiencies": []
@@ -112,21 +183,92 @@
     {
         "name": "Rogue",
         "base_hp": 8,
+        "hp_per_level": 5,
         "skill_points": 8,
         "bonus_feat_interval": 0,
-        "base_attack_bonus": "Medium",
+        "base_attack_bonus": "Average",
         "saving_throws": {
-            "Fortitude": "Poor",
-            "Reflex": "Good",
-            "Will": "Poor"
+            "Fortitude": "Low",
+            "Reflex": "High",
+            "Will": "Low"
         },
         "class_skills": ["Stealth", "Mobility", "Trickery"],
         "proficiencies": [],
-        "description": "Rogues are cunning and agile characters who excel in stealth, deception, and precision strikes. They are skilled at navigating social situations and exploiting weaknesses in their enemies.",
+        "description": "Rogues excelt at moving about unseen and catching foes unaware, and tend to avoid head-to-head combat. Their varied skills and abilities allow them to be highly versatile, with great variations in expertise existing between different rogues. Most, however, excel in overcoming hindrances of all types, form unlocking doors and disarming traps to outwitting magical hazards and conning dull-witted opponents.",
         "archetypes": [
             {
+                "name": "Dark Lurker",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Eldritch Scoundrel",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Knife Master",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Master of All",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Rowdy",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Sylvan Trickster",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
                 "name": "Thug",
-                "description": "The Thug is a ruthless rogue who specializes in intimidation and brute force, often using fear to control situations and gain the upper hand.",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Underground Chemist",
+                "description": "Dark lurkers, also known as 'the hungry night,' use darkness as their ally.",
                 "modifiers": {
                     "class_skills": [""],
                     "proficiencies": []
@@ -139,21 +281,82 @@
     {
         "name": "Cleric",
         "base_hp": 8,
+        "hp_per_level": 5,
         "skill_points": 2,
         "bonus_feat_interval": 0,
-        "base_attack_bonus": "Medium",
+        "base_attack_bonus": "Average",
         "saving_throws": {
-            "Fortitude": "Good",
-            "Reflex": "Poor",
-            "Will": "Good"
+            "Fortitude": "High",
+            "Reflex": "Low",
+            "Will": "High"
         },
         "class_skills": ["Lore(Religion)"],
         "proficiencies": [],
-        "description": "Clerics are divine spellcasters who draw their power from deities. They serve as healers, protectors, and warriors of faith, wielding both magic and martial prowess in the name of their gods.",
+        "description": "More than capable of upholding the honor of their deities in battle, clerics often prove stalwart and capable combatants. Their true strength lies in their capability to draw upon the power of their deities, whether to increase their own and their allies' prowess in battle, to vex their foes with divine magic, or to lend healing to companaions in need. As their powers are influenced bby their faith, all clerics must focus their worship upon a divine source.",
         "archetypes": [
             {
-                "name": "Warpriest",
-                "description": "The Warpriest is a cleric who combines martial combat with divine magic, excelling in frontline battles while still providing support to their allies through healing and buffs.",
+                "name": "Angelfire Apostle",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Crusader",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Demonbane Priest",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Ecclesitheurge",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Herald Caller",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Priest of Balance",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            },
+            {
+                "name": "Separatist",
+                "description": "Angelfire apostles use the powers of good to avoid violence when possible and cleanse both maladies and evil creatures with blinding flames.",
                 "modifiers": {
                     "class_skills": [""],
                     "proficiencies": []
