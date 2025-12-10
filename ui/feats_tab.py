@@ -65,6 +65,9 @@ class FeatsTab(QWidget):
         if not chosen_feat:
             return
         
+        if len(self.character.feats) >= self.character.total_feat_slots():
+            return
+
         for prereq in chosen_feat.get("prerequisite_feats", []):
             if prereq not in [f["name"] for f in self.character.feats]:
                 return

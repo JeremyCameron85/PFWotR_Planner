@@ -97,3 +97,16 @@ class Character:
                         removed.add(feat["name"])
                         changed = True
                         break
+
+    def total_feat_slots(self) -> int:
+        slots = 0
+        slots += 1
+        slots += (self.level - 1) // 3
+        bonus_interval = self.char_class.get("bonus_feat_interval")
+        if bonus_interval:
+            slots += self.level // bonus_interval
+        
+        for lvl in self.race.get("bonus_feats", []):
+            if self.level >= lvl:
+                slots += 1
+        return slots

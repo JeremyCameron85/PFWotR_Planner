@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
     def on_class_changed(self):
         self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
-        self.feats_tab.refresh_selected_feats()
+        self.feats_tab.refresh_selected_feats()         
         self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()

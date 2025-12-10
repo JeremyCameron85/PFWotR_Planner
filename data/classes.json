@@ -3,6 +3,7 @@
         "name": "Fighter",
         "hit_die": 10,
         "skill_points": 2,
+        "bonus_feat_interval": 2,
         "base_attack_bonus": "High",
         "saving_throws": {
             "Fortitude": "Good",
@@ -11,6 +12,7 @@
         },
         "class_skills": ["Athletics", "Mobility", "Perception"],
         "proficiencies": [],
+        "description": "Fighters are versatile warriors skilled in the use of a variety of weapons and armor. They excel in combat, able to adapt to different fighting styles and situations.",
         "archetypes": [
             {
                 "name": "Aldori Defender",
@@ -78,6 +80,7 @@
         "name": "Wizard",
         "hit_die": 6,
         "skill_points": 2,
+        "bonus_feat_interval": 0,
         "base_attack_bonus": "Poor",
         "saving_throws": {
             "Fortitude": "Poor",
@@ -86,6 +89,7 @@
         },
         "class_skills": ["Knowledge(Arcana)", "Knowledge(World)", "Use Magic Device"],
         "proficiencies": [],
+        "description": "Wizards are masters of arcane magic, capable of casting powerful spells to manipulate the world around them. They rely on their intelligence and extensive study to unlock magical secrets.",
         "archetypes": [
             {
                 "name": "School Specialist",
@@ -103,6 +107,7 @@
         "name": "Rogue",
         "hit_die": 8,
         "skill_points": 8,
+        "bonus_feat_interval": 0,
         "base_attack_bonus": "Medium",
         "saving_throws": {
             "Fortitude": "Poor",
@@ -110,12 +115,26 @@
             "Will": "Poor"
         },
         "class_skills": ["Stealth", "Mobility", "Trickery"],
-        "proficiencies": []
+        "proficiencies": [],
+        "description": "Rogues are cunning and agile characters who excel in stealth, deception, and precision strikes. They are skilled at navigating social situations and exploiting weaknesses in their enemies.",
+        "archetypes": [
+            {
+                "name": "Thug",
+                "description": "The Thug is a ruthless rogue who specializes in intimidation and brute force, often using fear to control situations and gain the upper hand.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            }
+        ]
     },
     {
         "name": "Cleric",
         "hit_die": 8,
         "skill_points": 2,
+        "bonus_feat_interval": 0,
         "base_attack_bonus": "Medium",
         "saving_throws": {
             "Fortitude": "Good",
@@ -123,6 +142,19 @@
             "Will": "Good"
         },
         "class_skills": ["Lore(Religion)"],
-        "proficiencies": []
+        "proficiencies": [],
+        "description": "Clerics are divine spellcasters who draw their power from deities. They serve as healers, protectors, and warriors of faith, wielding both magic and martial prowess in the name of their gods.",
+        "archetypes": [
+            {
+                "name": "Warpriest",
+                "description": "The Warpriest is a cleric who combines martial combat with divine magic, excelling in frontline battles while still providing support to their allies through healing and buffs.",
+                "modifiers": {
+                    "class_skills": [""],
+                    "proficiencies": []
+                },
+                "features_removed": [],
+                "features_added": []
+            }
+        ]
     }
 ]
