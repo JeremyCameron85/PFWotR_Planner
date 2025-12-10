@@ -98,6 +98,13 @@ class Character:
                         changed = True
                         break
 
+        max_slots = self.total_feat_slots()
+        if len(self.feats) > max_slots:
+            self.feats = self.feats[:max_slots]
+            removed.update(f["name"] for f in self.feats[max_slots:])
+
+        return removed
+
     def total_feat_slots(self) -> int:
         slots = 0
         slots += 1
