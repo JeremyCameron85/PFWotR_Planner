@@ -10,7 +10,8 @@
             "Wis": 0,
             "Cha": 0
         },
-        "traits": ["Bonus Feat", "Extra Skill Point"]
+        "traits": ["Bonus Feat", "Extra Skill Point"],
+        "description": "Humans are known for their versatility and ambition, often excelling in a variety of fields due to their adaptability and determination."
     },
     {
         "name": "Elf",
@@ -23,7 +24,8 @@
             "Wis": 0,
             "Cha": 0
         },
-        "traits": ["Keen Senses", "Fey Ancestry"]
+        "traits": ["Keen Senses", "Fey Ancestry"],
+        "description": "Elves are known for their grace, agility, and connection to nature, often possessing keen senses and a mystical heritage."
     },
     {
         "name": "Dwarf",
@@ -36,6 +38,7 @@
             "Wis": 0,
             "Cha": -2
         },
-        "traits": ["Darkvision", "Dwarven Resilience"]
+        "traits": ["Darkvision", "Dwarven Resilience"],
+        "description": "Dwarves are sturdy and resilient, known for their toughness, craftsmanship, and strong sense of tradition."
     }
 ]
