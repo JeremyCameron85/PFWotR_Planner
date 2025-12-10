@@ -64,11 +64,9 @@ class Character:
         return max(1, base + int_mod + race_mod)
     
     def remove_feat(self, feat_name: str):
-        for feat in self.feats:
-            if feat["name"] == feat_name:
-                self.feats.remove(feat)
-                return True
-        return False
+        before =  len(self.feats)
+        self.feats = [f for f in self.feats if f["name"] != feat_name]
+        return len(self.feats) < before
     
     def validate_feats(self, all_feats):
         removed = set()
@@ -81,21 +79,21 @@ class Character:
                     continue
 
                 if self.level < full_def.get("prerequisite_level", 1):
-                    self.feats.remove(feat)
+                    self.feats = [f for f in self.feats if f["name"] != feat["name"]]
                     removed.add(feat["name"])
                     changed = True
                     continue
 
                 for stat, value in full_def.get("prerequisite_stats", {}).items():
                     if self.stats.get(stat, 0) < value:
-                        self.feats.remove(feat)
+                        self.feats = [f for f in self.feats if f["name"] != feat["name"]]
                         removed.add(feat["name"])
                         changed = True
                         break
 
                 for prereq in full_def.get("prerequisite_feats", []):
                     if prereq not in [f["name"] for f in self.feats]:
-                        self.feats.remove(feat)
+                        self.feats = [f for f in self.feats if f["name"] != feat["name"]]
                         removed.add(feat["name"])
                         changed = True
                         break
