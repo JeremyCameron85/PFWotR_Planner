@@ -86,6 +86,7 @@ class Character:
 
             if feat_level and feat_stats and feat_feats:
                 feats_list.append(feat)
+                print("APPEND HIT")
 
         return feats_list
     
@@ -169,10 +170,8 @@ class Character:
             int: Total number of feat slots available.
         """
         slots = 0
-        # Base feat at level 1
-        slots += 1
-        # Additional feats at every 3 levels
-        slots += (self.level - 1) // 3
+        # Feats every odd level
+        slots += (self.level + 1) // 2
         # Class bonus feats
         bonus_interval = self.char_class.get("bonus_feat_interval")
         if bonus_interval:
