@@ -1,0 +1,7 @@
+assets
+data
+db
+models
+tests
+ui
+venv
