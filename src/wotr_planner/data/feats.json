@@ -20,6 +20,13 @@
         "description": "You gain a +1 dodge bonus to  your AC. A condition that makes you lose your Dex bonus to AC also makes you lose the benefits of this feat."
     },
     {
+        "name": "Weapon Focus",
+        "prerequisite_level": 1,
+        "prerequisite_stats": {},
+        "prerequisite_feats":[],
+        "description": "Choose one type of weapon. You can also choose unarmed strike (or, if you are a spellcaster, melee or ranged touch attack) as your weapon for the purposes of this feat. Benefit: You gain +1 bonus on all attack rolls you make using the selected weapon. Special: You can gain this feat multiple times. Its effects don't stack. Each time you take the feat, it applies to a new type of weapon."
+    },
+    {
         "name": "LvlDummy",
         "prerequisite_level": 20,
         "prerequisite_stats": {},

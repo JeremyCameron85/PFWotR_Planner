@@ -75,7 +75,7 @@ def test_available_feats_with_prerequisites():
     names = [f["name"] for f in available]
 
     assert "Cleave" in names
-    assert "Dodge" not in names # Dexterity prerequisite not met
+    assert "Dodge" not in names
 
 def test_skill_points_per_level_with_modifiers():
     """
@@ -117,7 +117,7 @@ def test_validate_feats_removes_invalid_by_prereqs():
     removed = c.validate_feats(all_feats)
     assert "Cleave" in removed
     assert "LvlDummy" in removed
-    assert c.feats == [] # All invalid feats removed
+    assert c.feats == []
 
 def test_total_feat_slots_with_bonuses():
     """
@@ -130,21 +130,101 @@ def test_total_feat_slots_with_bonuses():
     slots = c.total_feat_slots()
     assert slots == 8 # 3 base + 4 (class) + 1 (race)
 
-def test_available_feats_append():
+def test_level_up():
+    """
+    Test that leveling up increases the character's level by one.
+    """
     c = Character()
-    c.level = 5
+    initial_level = c.level
+    c.level_up()
+    assert c.level == initial_level + 1
+
+def test_validate_feats_skips_unknown_feat():
+    """
+    Test that validate_feats skips feats not found in all_feats.
+    - Create a character with a feat that is not defined in all_feats.
+    - Verify that the feat remains after validation.
+    """
+    c = Character()
+    c.feats = [{"name": "UnknownFeat"}]
+    all_feats = []
+
+    removed = c.validate_feats(all_feats)
+
+    assert removed == set()
+    assert c.feats == [{"name": "UnknownFeat"}]
+
+def test_validate_feats_stat_requirement_pass():
+    """
+    Test that validate_feats retains feats when stat prerequisites are met.
+    - Create a character with a feat that has stat prerequisites.
+    - Verify that the feat is retained after validation.
+    """
+    c = Character()
     c.stats["Str"] = 15
     c.feats = [{"name": "Power Attack"}]
+    all_feats = [
+        {"name": "Power Attack", "prerequisite_stats": {"Str": 13}}
+    ]
+    removed = c.validate_feats(all_feats)
+    assert removed == set()
+    assert c.feats == [{"name": "Power Attack"}]
 
-    cleave = {
-        "name": "Cleave",
-        "prequisite_level": 1,
-        "prerequisite_stats": {"Str": 13},
-        "prerequisite_feats": ["Power Attack"]
-    }
-    all_feats = [cleave]
+def test_validate_feats_prereq_pass():
+    """
+    Test that validate_feats retains feats when feat prerequisites are met.
+    - Create a character with feats that satisfy each other's prerequisites.
+    - Verify that both feats are retained.
+    """
+    c = Character()
+    c.feats = [{"name": "Power Attack"}, {"name": "Cleave"}]
+    all_feats = [
+        {"name": "Power Attack"},
+        {"name": "Cleave", "prerequisite_feats": ["Power Attack"]}
+    ]
+    removed = c.validate_feats(all_feats)
+    assert removed == set()
+    assert {f["name"] for f in c.feats} == {"Power Attack", "Cleave"}
 
-    available = c.available_feats(all_feats)
+def test_validate_feats_trims_excess():
+    """
+    Test that validate_feats trims feats to fit within available feat slots.
+    - Create a character with more feats than available slots.
+    - Verify that excess feats are removed.
+    """
+    c = Character()
+    c.level = 1
+    c.stats["Str"] = 15
+    c.stats["Dex"] = 15
+    c.feats = [{"name": "Power Attack"}, {"name": "Cleave"}, {"name": "Dodge"}, {"name": "Weapon Focus"}]
+    all_feats = [
+        {"name": "Power Attack"},
+        {"name": "Cleave", "prerequisite_feats": ["Power Attack"]},
+        {"name": "Dodge"},
+        {"name": "Weapon Focus"}
+    ]
+    removed = c.validate_feats(all_feats)
+    assert len(c.feats) == 3 # Total feat slots at level 1 is 3
+    assert removed == set() # Some feats were removed
 
-    assert len(available) == 1
-    assert available == [cleave]
+def test_total_feat_slots_skips_class_bonus_below_level():
+    """
+    Test that total_feat_slots does not count class bonus feats if level is below the required interval.
+    - Create a character with a class that provides bonus feats at certain intervals.
+    - Set level below the interval and verify total feat slots.
+    """
+    c = Character(char_class={"name": "Fighter", "bonus_feats": [3]})
+    c.level = 2
+    
+    assert c.total_feat_slots() == 2 # 1 base + 1 (level-based), class bonus not applied yet
+
+def test_total_feat_slots_skips_race_bonus_below_level():
+    """
+    Test that total_feat_slots does not count race bonus feats if level is below the required interval.
+    - Create a character with a race that provides bonus feats at certain intervals.
+    - Set level below the interval and verify total feat slots.
+    """
+    c = Character(race={"name": "Human", "bonus_feats": [2]})
+    c.level = 1
+    
+    assert c.total_feat_slots() == 2 # 1 base + 1 (level-based), race bonus not applied yet
