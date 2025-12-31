@@ -82,6 +82,8 @@ class FeatsTab(QWidget):
         if feat:
             # Update description box with feat details
             self.description_box.setPlainText(feat.get("description", "No description available."))
+        else:
+            self.description_box.clear()
 
     def update_feats(self):
         """
