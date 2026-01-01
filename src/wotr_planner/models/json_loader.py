@@ -46,6 +46,6 @@ def load_feats():
     
 def load_traits():
     base_dir = Path(__file__).resolve().parent.parent
-    feats_path = base_dir / "data" / "traits.json"
-    with feats_path.open(encoding="utf-8") as traits_file:
+    traits_path = base_dir / "data" / "traits.json"
+    with traits_path.open(encoding="utf-8") as traits_file:
         return json.load(traits_file)
