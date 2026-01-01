@@ -1,1 +1,584 @@
-[]
+[
+    {
+        "name": "Basic",
+        "race": "Elf",
+        "description": "Basic elf heritage with no special modifications."
+    },
+    {
+        "name": "Blightborn",
+        "race": "Elf",
+        "traits_removed": ["Keen Senses", "Elven Magic"],
+        "save_bonuses": {
+            "Necromancy": 2,
+            "Curse": 2
+        },
+        "attack_bonuses": {
+            "Outsider (Demon)": 1
+        },
+        "description": "Blightborn elves are touched by dark energies, granting them resistances to necromantic and curse effects, as well as a bonus against demon-type outsiders."
+    },
+    {
+        "name": "Loremaster",
+        "race": "Elf",
+        "traits_removed": ["Keen Senses", "Elven Magic"],
+        "skill_bonuses": {
+            "Knowledge(Arcana)": 2,
+            "Use Magic Device": 2
+        },
+        "description": "Loremaster elves possess heightened knowledge and skill with magical devices, reflecting their deep understanding of arcane lore."
+    },
+    {
+        "name": "Basic",
+        "race": "Dwarf",
+        "description": "Basic dwarf heritage with no special modifications."
+    },
+    {
+        "name": "Barrow Dwarf",
+        "race": "Dwarf",
+        "traits_removed": ["Keen Senses", "Defensive Training - Giants", "Hatred - Orcs and Golbinoids"],
+        "skill_bonuses": {
+            "Lore(Religion)": 2
+        },
+        "attack_bonuses": {
+            "Undead": 1
+        },
+        "dodge_ac_bonuses": {
+            "Undead": 1
+        },
+        "description": "Barrow dwarves are deeply connected to their ancestral past, gaining bonuses to religious lore and attacks against undead."
+    },
+    {
+        "name": "Unstoppable Dwarf",
+        "race": "Dwarf",
+        "traits": ["Endurance"],
+        "traits_removed": ["Keen Senses", "Stability", "Defensive Training - Giants"],
+        "save_bonuses": {
+            "Fortitude": 1
+        },
+        "description": "Unstoppable dwarves possess the Endurance trait, which grants them a bonus to Fortitude saving throws."
+    },
+    {
+        "name": "Basic",
+        "race": "Gnome",
+        "description": "Basic gnome heritage with no special modifications."
+    },
+    {
+        "name": "Pyromaniac",
+        "race": "Gnome",
+        "traits_removed": ["Gnome Magic", "Illusion Resistance"],
+        "resistances": {
+            "Fire": 5
+        },
+        "spell_dc_bonuses": {
+            "Fire": 1
+        },
+        "description": "Pyromaniac gnomes are naturally attuned to fire magic, gaining resistance to fire damage and a bonus to Fire spell DCs."
+    },
+    {
+        "name": "Traveler",
+        "race": "Gnome",
+        "traits_removed": ["Hatred - Reptilian Humanoids", "Defensive Training - Giants", "Slow Movement"],
+        "skill_bonuses": {
+            "Lore(Nature)": 2
+        },
+        "description": "Travelers are gnomes who have embraced a nomadic lifestyle, gaining bonuses to nature lore and becoming more agile."
+    },
+    {
+        "name": "Basic",
+        "race": "Halfling",
+        "description": "Basic halfling heritage with no special modifications."
+    },
+    {
+        "name": "Craven",
+        "race": "Halfling",
+        "traits_removed": ["Halfling Luck", "Fearless"],
+        "save_bonuses": {
+            "Fear": -2,
+            "Reflex": 2
+        },
+        "description": "Craven halflings are more susceptible to fear effects but are exceptionally nimble, gaining a bonus to Reflex saves. Become shaken instead of frightened."
+    },
+    {
+        "name": "Hasty",
+        "race": "Halfling",
+        "traits_removed": ["Sure-Footed", "Fearless", "Slow Movement"],
+        "description": "Hasty Halflings are exceptionally quick, sacrificing some stability and fearlessness for increased speed and agility. Bonus to initiative rolls."
+    },
+    {
+        "name": "Basic",
+        "race": "Half-Elf",
+        "traits": ["Adaptability"],
+        "description": "Basic half-elf heritage with no special modifications."
+    },
+    {
+        "name": "Dual Heritage",
+        "race": "Half-Elf",
+        "traits": ["Elven Magic"],
+        "traits_removed": ["Keen Senses"],
+        "save_bonuses": {
+            "will": 2
+        },
+        "description": "Half-elves with dual heritage gain the benefits of both elven and human ancestry, including a bonus to Will saves."
+    },
+    {
+        "name": "Kindred-Raised",
+        "race": "Half-Elf",
+        "modifiers": {
+            "Cha": 2
+        },
+        "traits_removed": ["Keen Senses", "Elven Immunities"],
+        "description": "Kindred-raised half-elves are nurtured among humans, leading to a stronger charisma at the expense of some elven traits."
+    },
+    {
+        "name": "Basic",
+        "race": "Half-Orc",
+        "description": "Basic half-orc heritage with no special modifications."
+    },
+    {
+        "name": "Human-Raised",
+        "race": "Half-Orc",
+        "skill_points_bonus": 1,
+        "traits": ["Skilled"],
+        "traits_removed": ["Orc Ferocity", "Orc Weapon Familiarity"],
+        "description": "Human-raised half-orcs are nurtured among humans, leading to a stronger charisma at the expense of some orcish traits."
+    },
+    {
+        "name": "Tribal",
+        "race": "Half-Orc",
+        "traits_removed": ["Orc Ferocity", "Keen Senses"],
+        "save_bonuses": {
+            "Fortitude": 1,
+            "Will": 1,
+            "Reflex": 1
+        },
+        "skill_bonuses": {
+            "Lore(Nature)": 2
+        },
+        "description": "Tribal half-orcs are raised in the wilds, gaining a bonus to Lore(Nature) and improved saving throws."
+    },
+    {
+        "name": "Aasimar",
+        "race": "Aasimar",
+        "modifiers": {
+            "Wis": 2,
+            "Cha": 2
+        },
+        "traits": ["Searing Light"],
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Perception": 2
+        },
+        "description": "Aasimar heritage grants a bonus to Wisdom and Charisma, as well as bonuses to Persuasion(Diplomacy) and Perception skills."
+    },
+    {
+        "name": "Angelkin (Angel-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Str": 2,
+            "Cha": 2
+        },
+        "traits": ["Restoration, Lesser"],
+        "skill_bonuses": {
+            "Lore(Religion)": 2,
+            "Use Magic Device": 2
+        },
+        "description": "Angelkin (Angel-Blooded) heritage grants a bonus to Strength and Charisma, as well as bonuses to Lore(Religion) and Use Magic Device skills."
+    },
+    {
+        "name": "Emberkin (Peri-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Int": 2,
+            "Cha": 2
+        },
+        "traits": ["Burning Arc"],
+        "skill_bonuses": {
+            "Lore(Religion)": 2,
+            "Knowledge(Arcana)": 2
+        },
+        "description": "Emberkin (Peri-Blooded) heritage grants a bonus to Intelligence and Charisma, as well as bonuses to Lore(Religion) and Knowledge(Arcana) skills."
+    },
+    {
+        "name": "Idyllkin (Agathion-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Con": 2,
+            "Cha": 2
+        },
+        "traits": ["Summon Nature's Ally III"],
+        "skill_bonuses": {
+            "Lore(Nature)": 2,
+            "Perception": 2
+        },
+        "description": "Idyllkin (Agathion-Blooded) heritage grants a bonus to Constitution and Charisma, as well as bonuses to Lore(Nature) and Perception skills."
+    },
+    {
+        "name": "Lawbringer (Archon-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Con": 2,
+            "Wis": 2
+        },
+        "traits": ["Hold Person"],
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Perception": 2
+        },
+        "description": "Lawbringer (Archon-Blooded) heritage grants a bonus to Wisdom and Constitution, as well as bonuses to Persuasion and Perception skills."
+    },
+    {
+        "name": "Musetouched (Azata-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Dex": 2,
+            "Cha": 2
+        },
+        "traits": ["Glitterdust"],
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Mobility": 2
+        },
+        "description": "Musetouched (Azata-Blooded) heritage grants a bonus to Dexterity and Charisma, as well as bonuses to Persuasion and Mobility skills."
+    },
+    {
+        "name": "Plumekith (Garuda-Blooded)",
+        "race": "Aasimar",
+        "modifiers": {
+            "Dex": 2,
+            "Wis": 2
+        },
+        "traits": ["Invisibility"],
+        "skill_bonuses": {
+            "Mobility": 2,
+            "Athletics": 2
+        },
+        "description": "Plumekith (Garuda-Blooded) heritage grants a bonus to Wisdom and Dexterity, as well as bonuses to Mobility and Athletics skills."
+    },
+    {
+        "name": "Beastbrood (Rakshasa-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Dex": 2,
+            "Wis": -2,
+            "Cha": 2
+        },
+        "traits": ["Blindness"],
+        "skill_bonuses": {
+            "Perception": 2,
+            "Persuasion": 2
+        },
+        "damage_reduction": [
+            { "amount": 2, "bypassed_by": "Piercing" }
+        ],
+        "description": "Beastbrood (Rakshasa-Spawn) heritage grants a bonus to Dexterity and Charisma, as well as bonuses to Perception and Persuasion(Bluff) skills."
+    },
+    {
+        "name": "Faultspawn (Asura-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Dex": 2,
+            "Int": -2,
+            "Wis": 2
+        },
+        "traits": ["Hideous Laughter"],
+        "save_bonuses": {
+            "Enchantment": 2
+        },
+        "skill_bonuses": {
+            "Knowledge(Arcana)": 2,
+            "Knowledge(World)": 2
+        },
+        "description": "Faultspawn (Asura-Spawn) heritage grants a bonus to Dexterity and Wisdom, as well as bonuses to Knowledge(Arcana) and Knowledge(World) skills."
+    },
+    {
+        "name": "Foulspawn (Demodand-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Con": 2,
+            "Int": -2,
+            "Wis": 2
+        },
+        "traits": ["Cacophonous Call"],
+        "skill_bonuses": {
+            "Lore(Religion)": 2,
+            "Persuasion": 2
+        },
+        "attack_bonuses": {
+            "Cleric": 1,
+            "Inquisitor": 1,
+            "Paladin": 1
+        },
+        "description": "Foulspawn (Demodand-Spawn) heritage grants a bonus to Constitution and Wisdom, as well as bonuses to Lore(Religion) and Persuasion(Intimidate) skills."
+    },
+    {
+        "name": "Grimspawn (Daemon-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Dex": 2,
+            "Int": 2,
+            "Wis": -2
+        },
+        "traits": ["Frigin Touch"],
+        "skill_bonuses": {
+            "Trickery": 2,
+            "Persuasion": 2
+        },
+        "resistances": {
+            "Acid": 5
+        },
+        "description": "Grimspawn (Daemon-Spawn) heritage grants a bonus to Dexterity and Intelligence, as well as bonuses to Trickery and Persuasion(Bluff) skills."
+    },
+    {
+        "name": "Hellspawn (Devil-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Con": 2,
+            "Wis": 2,
+            "Cha": -2
+        },
+        "traits": ["Scorching Ray"],
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Perception": 2
+        },
+        "description": "Hellspawn (Devil-Spawn) heritage grants a bonus to Constitution and Wisdom, as well as bonuses to Persuasion(Diplomacy) and Perception skills. No penalty to Charisma if you have the Infernal Bloodline."
+    },
+    {
+        "name": "Hungerseed (Oni-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Str": 2,
+            "Wis": 2,
+            "Cha": -2
+        },
+        "traits": ["Invisibility"],
+        "skill_bonuses": {
+            "Persuasion": 2
+        },
+        "combat_maneuver_bonuses": 2,
+        "combat_maneuver_defenses": 2,
+        "description": "Hungerseed (Oni-Spawn) heritage grants a bonus to Strength and Wisdom, as well as bonuses to Persuasion skills."
+    },
+    {
+        "name": "Motherless (Qlippoth-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Str": 2,
+            "Wis": 2,
+            "Int": -2
+        },
+        "traits": ["Blur"],
+        "skill_bonuses": {
+            "Mobility": 2,
+            "Lore(Nature)": 2
+        },
+        "natural_attacks": [
+            {
+                "type": "bite",
+                "damage": "1d6"
+            }
+        ],
+        "description": "Motherless (Qlippoth-Spawn) heritage grants a bonus to Strength and Wisdom, as well as bonuses to Mobility and Lore(Nature) skills."
+    },
+    {
+        "name": "Pitborn (Demon-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Str": 2,
+            "Int": -2,
+            "Cha": 2
+        },
+        "traits": ["Stone Call"],
+        "skill_bonuses": {
+            "Trickery": 2,
+            "Perception": 2
+        },
+        "description": "Pitborn (Demon-Spawn) heritage grants a bonus to Strength and Charisma, as well as bonuses to Trickery and Perception skills. Bonus to confirm critical hits."
+    },
+    {
+        "name": "Shackleborn (Kyton-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Con": 2,
+            "Cha": 2,
+            "Wis": -2
+        },
+        "traits": ["Web"],
+        "skill_bonuses": {
+            "Mobility": 2,
+            "Persuasion": 2
+        },
+        "natural_ac_bonuses": 1,
+        "description": "Shackleborn (Kyton-Spawn) heritage grants a bonus to Constitution and Charisma, as well as bonuses to Mobility and Persuasion(Intimidate) skills."
+    },
+    {
+        "name": "Spitespawn (Div-Spawn)",
+        "race": "Tiefling",
+        "modifiers": {
+            "Dex": 2,
+            "Int": -2,
+            "Cha": 2
+        },
+        "traits": ["Sound Burst"],
+        "skill_bonuses": {
+            "Knowledge(World)": 2,
+            "Persuasion": 2
+        },
+        "spell_dc_bonuses": {
+            "Enchantment": 1
+        },
+        "description": "Spitespawn (Div-Spawn) heritage grants a bonus to Dexterity and Charisma, as well as bonuses to Knowledge(World) and Persuasion(Diplomacy) skills."
+    },
+    {
+        "name": "Tiefling",
+        "race": "Tiefling",
+        "modifiers": {
+            "Dex": 2,
+            "Int": 2,
+            "Cha": -2
+        },
+        "traits": ["Resist Energy"],
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Stealth": 2
+        },
+        "description": "Tiefling heritage grants a bonus to Dexterity and Intelligence, as well as bonuses to Persuasion(Bluff) and Stealth skills. No penalty to Charisma with the Abyssal or Infernal bloodlines."
+    },
+    {
+        "name": "Gemsoul (Crystal Oread)",
+        "race": "Oread",
+        "modifiers": {
+            "Str": 2,
+            "Cha": 2,
+            "Wis": -2
+        },
+        "traits": ["Color Spray"],
+        "description": "Gemsoul (Crystal Oread) heritage grants a bonus to Strength and Charisma, as well as the Color Spray spell."
+    },
+    {
+        "name": "Ironsoul (Metal Oread)",
+        "race": "Oread",
+        "modifiers": {
+            "Con": 2,
+            "Wis": 2,
+            "Dex": -2
+        },
+        "traits": ["Lead Blades"],
+        "description": "Ironsoul (Metal Oread) heritage grants a bonus to Constitution and Wisdom, as well as the Lead Blades spell."
+    },
+    {
+        "name": "Oread",
+        "race": "Oread",
+        "modifiers": {
+            "Str": 2,
+            "Wis": 2,
+            "Cha": -2
+        },
+        "traits": ["Stone Fist"],
+        "description": "Oread heritage grants a bonus to Strength and Wisdom, as well as the Stone Fist spell."
+    },
+    {
+        "name": "Dhampir",
+        "race": "Dhampir",
+        "modifiers": {
+            "Dex": 2,
+            "Cha": 2,
+            "Con": -2
+        },
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Perception": 2
+        },
+        "description": "Dhampir heritage grants a bonus to Dexterity and Charisma, as well as bonuses to Persuasion(Bluff) and Perception skills."
+    },
+    {
+        "name": "Jiang-Shi-Born (Ru-Shi)",
+        "race": "Dhampir",
+        "modifiers": {
+            "Str": 2,
+            "Int": 2,
+            "Dex": -2
+        },
+        "skill_bonuses": {
+            "Mobility": 2,
+            "Knowledge(World)": 2
+        },
+        "description": "Jiang-Shi-Born (Ru-Shi) heritage grants a bonus to Strength and Intelligence, as well as bonuses to Mobility and Knowledge(World) skills."
+    },
+    {
+        "name": "Moroi-Born (Svetocher)",
+        "race": "Dhampir",
+        "modifiers": {
+            "Str": 2,
+            "Cha": 2,
+            "Con": -2
+        },
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Knowledge(World)": 2
+        },
+        "description": "Moroi-Born (Svetocher) heritage grants a bonus to Strength and Charisma, as well as bonuses to Persuasion(Diplomacy) and Knowledge(World) skills."
+    },
+    {
+        "name": "Nosferatu-Born (Ancient-Born)",
+        "race": "Dhampir",
+        "modifiers": {
+            "Str": 2,
+            "Wis": 2,
+            "Con": -2
+        },
+        "skill_bonuses": {
+            "Athletics": 2,
+            "Lore(Nature)": 2
+        },
+        "description": "Nosferatu-Born (Ancient-Born) heritage grants a bonus to Strength and Wisdom, as well as bonuses to Athletics and Lore(Nature) skills."
+    },
+    {
+        "name": "Vampire King-Born (Sacred Ancestry)",
+        "race": "Dhampir",
+        "modifiers": {
+            "Str": 2,
+            "Int": 2,
+            "Dex": -2
+        },
+        "skill_bonuses": {
+            "Persuasion": 2,
+            "Knowledge(World)": 2
+        },
+        "description": "Vampire King-Born (Sacred Ancestry) heritage grants a bonus to Strength and Intelligence, as well as bonuses to Persuasion(Diplomacy) and Knowledge(World) skills.  "
+    },
+    {
+        "name": "Vetala-Born (Ajibachana)",
+        "race": "Dhampir",
+        "modifiers": {
+            "Dex": 2,
+            "Int": 2,
+            "Wis": -2
+        },
+        "skill_bonuses": {
+            "Stealth": 2,
+            "Use Magic Device": 2
+        },
+        "description": "Vetala-Born (Ajibachana) heritage grants a bonus to Dexterity and Intelligence, as well as bonuses to Stealth and Use Magic Device skills."
+    },
+    {
+        "name": "Keen Kitsune",
+        "race": "Kitsune",
+        "modifiers": {
+            "Dex": 2,
+            "Int": 2,
+            "Str": -2
+        },
+        "description": "Keen Kitsune heritage grants a bonus to Dexterity and Intelligence, as well as a penalty to Strength."
+    },
+    {
+        "name": "Kitsune",
+        "race": "Kitsune",
+        "modifiers": {
+            "Dex": 2,
+            "Cha": 2,
+            "Str": -2
+        },
+        "description": "Kitsune heritage grants a bonus to Dexterity and Charisma, as well as a penalty to Strength."
+    }
+]
