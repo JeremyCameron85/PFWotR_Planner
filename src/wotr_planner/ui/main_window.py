@@ -7,6 +7,7 @@ from wotr_planner.ui.feats_tab import FeatsTab
 from wotr_planner.ui.background_tab import BackgroundTab
 from wotr_planner.ui.heritage_tab import HeritageTab
 from wotr_planner.models.character import Character
+from wotr_planner.models.json_loader import load_traits
 
 class MainWindow(QMainWindow):
     """
@@ -28,6 +29,8 @@ class MainWindow(QMainWindow):
         # Initialize character model
         self.character = Character()
 
+        self.trait_registry = {t["name"]: t for t in load_traits()}
+
         # Set up tab widget
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
@@ -41,6 +44,8 @@ class MainWindow(QMainWindow):
         self.stats_tab = StatsTab(self.character)
         self.skills_tab = SkillsTab(self.character)
         self.feats_tab = FeatsTab(self.character)
+
+        self.character.recalculate_traits(self.trait_registry)
 
         # Connect signals for inter-tab updates
         self.classes_tab.class_changed.connect(self.on_class_changed)
@@ -66,9 +71,12 @@ class MainWindow(QMainWindow):
         - Recalculates skills based on new race.
         - Updates skill points display.
         """
+        self.character.stats = self.character.point_buy_stats.copy()
+        self.character.heritage = None
         self.stats_tab.apply_race_bonuses(self.character.race)
+        self.character.recalculate_traits(self.trait_registry)
         self.heritage_tab.refresh_heritage_options()
-        self.character.validate_feats(self.feats_tab.feats)
+        self.character.validate_feats(self.feats_tab.feats)        
         self.feats_tab.update_feats()
         self.feats_tab.refresh_selected_feats()
         self.skills_tab.recalculate_effective_skills()
@@ -96,6 +104,7 @@ class MainWindow(QMainWindow):
         - Updates skill points display.
         """
         self.stats_tab.recalculate_modifiers(self.character.feats)
+        self.character.recalculate_traits(self.trait_registry)
         self.skills_tab.recalculate_effective_skills()
         self.skills_tab.enforce_skill_point_limit()
         self.skills_tab.update_skill_points()
@@ -120,6 +129,7 @@ class MainWindow(QMainWindow):
         """
         self.stats_tab.apply_heritage_modifiers(self.character.heritage)
         self.character.validate_feats(self.feats_tab.feats)
+        self.character.recalculate_traits(self.trait_registry)
         self.feats_tab.update_feats()
         self.feats_tab.refresh_selected_feats()
         self.skills_tab.recalculate_effective_skills()

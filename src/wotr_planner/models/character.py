@@ -24,6 +24,24 @@ class Character:
         self.background = None
         self.level = 1
         self.feats = []
+        self.traits = []
+        self.trait_bonuses = {
+            "saves": {},
+            "ab": {},
+            "natural_attacks": [],
+            "skills": {},
+            "ac": 0,
+            "dodge_ac": {},
+            "natural_ac": 0,
+            "resistances": {},
+            "spell_dc": {},
+            "damage_reduction": [],
+            "cmb": 0,
+            "cmd": 0,
+            "skill_points_bonus": 0,
+            "innate_abilities": [],
+            "innate_feats": []
+        }
         # Initialize stats
         self.point_buy_stats = {
             "Str":10,
@@ -99,7 +117,8 @@ class Character:
         base = self.char_class.get("skill_points", 0)
         int_mod = (self.stats["Int"] - 10) // 2
         race_mod = self.race.get("skill_points_bonus", 0)
-        return max(1, base + int_mod + race_mod)
+        heritage_mod = self.trait_bonuses.get("skill_points_bonus", 0)
+        return max(1, base + int_mod + race_mod + heritage_mod)
     
     def remove_feat(self, feat_name: str):
         """
@@ -187,3 +206,87 @@ class Character:
             if self.level >= lvl:
                 slots += 1
         return slots
+    
+    def recalculate_traits(self, trait_registry):
+        self.traits = []
+        self.trait_bonuses = {
+            "saves": {},
+            "ab": {},
+            "natural_attacks": [],
+            "skills": {},
+            "ac": 0,
+            "dodge_ac": {},
+            "natural_ac": 0,
+            "resistances": {},
+            "spell_dc": {},
+            "damage_reduction": [],
+            "cmb": 0,
+            "cmd": 0,
+            "skill_points_bonus": 0,
+            "innate_abilities": [],
+            "innate_feats": []
+        }
+        race_traits = self.race.get("traits", [])
+        self.traits.extend(race_traits)
+
+        if self.heritage and "traits_removed" in self.heritage:
+            removed = set(self.heritage["traits_removed"])
+            self.traits =  [t for t in self.traits if t not in removed]
+
+        if self.heritage and "traits" in self.heritage:
+            self.traits.extend(self.heritage["traits"])
+
+        for trait_name in self.traits:
+            trait_def = trait_registry.get(trait_name)
+            if not trait_def:
+                continue
+
+            for save, bonus in trait_def.get("save_bonuses", {}).items():
+                self.trait_bonuses["saves"][save] = \
+                    self.trait_bonuses["saves"].get(save, 0) + bonus
+
+            for creature, bonus in trait_def.get("attack_bonuses", {}).items():
+                self.trait_bonuses["ab"][creature] = \
+                    self.trait_bonuses["ab"].get(creature, 0) + bonus
+            
+            for skill, bonus in trait_def.get("skill_bonuses", {}).items():
+                self.trait_bonuses["skills"][skill] = \
+                    self.trait_bonuses["skills"].get(skill, 0) + bonus
+
+            for resist, amount in trait_def.get("resistances", {}).items():
+                self.trait_bonuses["resistances"][resist] = \
+                    self.trait_bonuses["resistances"].get(resist, 0) + amount
+            
+            for school, bonus in trait_def.get("spell_dc_bonuses", {}).items():
+                self.trait_bonuses["spell_dc"][school] = \
+                    self.trait_bonuses["spell_dc"].get(school, 0) + bonus
+                
+            for creature, bonus in trait_def.get("dodge_ac_bonuses", {}).items():
+                self.trait_bonuses["dodge_ac"][creature] = \
+                    self.trait_bonuses["dodge_ac"].get(creature, 0) + bonus
+                
+            if "natural_ac_bonuses" in trait_def:
+                self.trait_bonuses["natural_ac"] += trait_def["natural_ac_bonuses"]
+
+            if "combat_maneuver_bonuses" in trait_def:
+                self.trait_bonuses["cmb"] += trait_def["combat_maneuver_bonuses"]
+
+            if "combat_maneuver_defenses" in trait_def:
+                self.trait_bonuses["cmd"] += trait_def["combat_maneuver_defenses"]
+
+            for dr in trait_def.get("damage_reduction", []):
+                self.trait_bonuses["damage_reduction"].append(dr)
+
+            for ability in trait_def.get("innate_abilities", []):
+                self.trait_bonuses["innate_abilities"].append(ability)
+
+            for feat in trait_def.get("innate_feats", []):
+                self.trait_bonuses["innate_feats"].append(feat)
+            
+            for attack in trait_def.get("natural_attacks", []):
+                self.trait_bonuses["natural_attacks"].append(attack)
+
+        if self.heritage:
+            if "skill_points_bonus" in self.heritage:
+                self.trait_bonuses["skill_points_bonus"] += \
+                    self.heritage["skill_points_bonus"]

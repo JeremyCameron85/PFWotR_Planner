@@ -154,6 +154,9 @@ class SkillsTab(QWidget):
                 # Update effective skill value
                 self.character.skills[skill] = self.character.skills.get(skill, 0) + bonus
 
+        for skill_name, bonus in self.character.trait_bonuses["skills"].items():
+            self.character.skills[skill_name] = self.character.skills.get(skill_name, 0) + bonus
+
         # Update UI labels for effective skills
         for skill, label in self.effective_labels.items():
             label.setText(str(self.character.skills.get(skill, 0)))
