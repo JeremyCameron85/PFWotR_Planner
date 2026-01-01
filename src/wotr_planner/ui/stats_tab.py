@@ -25,6 +25,7 @@ class StatsTab(QWidget):
         stats_layout = QGridLayout()
         stats_group.setLayout(stats_layout)
         self.stat_widgets = {}
+        self._updating_stats = False
 
         # Points label
         self.points_label = QLabel()
@@ -73,14 +74,16 @@ class StatsTab(QWidget):
             stat_name (str): Name of the ability score being updated.
             displayed_value (int): The displayed value of the ability score including racial modifiers.
         """
+        if self._updating_stats:
+            return
         # Determine racial/heritage modifier
-        racial_mod = 0
+        racial_mod = 0 # Default to 0
         if self.character.heritage:
             racial_mod = self.character.heritage.get("modifiers", {}).get(stat_name, 0)
         elif self.character.race:
             racial_mod = self.character.race.get("modifiers", {}).get(stat_name, 0)
         else:
-            racial_mod = 0
+            racial_mod = 0 # No modifier
         
         # Calculate base value without racial modifiers
         base_value = displayed_value - racial_mod
@@ -179,45 +182,63 @@ class StatsTab(QWidget):
 
     def recalculate_modifiers(self, feats):
         """
-        Recalculate character ability scores based on point buy, race, heritage, and feats.
-        - Updates the character's ability scores and UI elements accordingly.
+        Recalculate ability score modifiers based on racial/heritage and feat modifiers.
+        - Updates the character's stats and UI elements accordingly.
+        - Emits stats_changed signal.
+        - Prevents recursive updates using a flag.
         Args:
             feats (list): List of character feats affecting ability scores.
         """
-        # Reset stats to point buy values
-        self.character.stats = self.character.point_buy_stats.copy()
-        # Apply race, heritage, and feat modifiers
-        if self.character.race:
-            for stat, bonus in self.character.race.get("modifiers", {}).items():
-                self.character.stats[stat] += bonus
-
-        if self.character.heritage:
-            for stat, bonus in self.character.heritage.get("modifiers", {}).items():
-                race_bonus = self.character.race.get("modifiers", {}).get(stat, 0) if self.character.race else 0
-                self.character.stats[stat] -= race_bonus
-                self.character.stats[stat] += bonus
-
-        for feat in feats:
-            for stat, bonus in feat.get("modifiers", {}).items():
-                self.character.stats[stat] += bonus
+        # Prevent recursive updates
+        if self._updating_stats:
+            return
         
-        # Update spin boxes to reflect current stats with racial/heritage modifiers
-        for stat, spin in self.stat_widgets.items():
-            if self.character.heritage:
-                racial_mod = self.character.heritage.get("modifiers", {}).get(stat, 0)
-            elif self.character.race:
-                racial_mod = self.character.race.get("modifiers", {}).get(stat, 0)
+        self._updating_stats = True
+        try:
+            # Reset stats to point buy values
+            self.character.stats = self.character.point_buy_stats.copy()
+
+            # Apply racial/heritage modifiers
+            if self.character.heritage and self.character.heritage.get("modifiers"):
+                mods_source = self.character.heritage["modifiers"]
+            elif self.character.race and self.character.race.get("modifiers"):
+                mods_source = self.character.race["modifiers"]
             else:
-                racial_mod = 0
+                mods_source = {} # No modifiers
+            
+            for stat, bonus in mods_source.items():
+                if stat in self.character.stats:
+                    self.character.stats[stat] += bonus
 
-            # Update spin box value
-            spin.blockSignals(True)
-            # Set the range and value of the spin box based on racial modifiers
-            spin.setRange(7 + racial_mod, 18 + racial_mod)
-            # Set value to current stat plus racial modifier
-            spin.setValue(self.character.point_buy_stats[stat] + racial_mod)
-            spin.blockSignals(False)
+            # Apply feat modifiers
+            for feat in feats:
+                for stat, bonus in feat.get("modifiers", {}).items():
+                    if stat in self.character.stats:
+                        self.character.stats[stat] += bonus
 
-        # Update points label and emit stats changed signal
-        self.update_points_label()
-        self.stats_changed.emit()
+            print("final stats:", self.character.stats)
+            # Update UI elements to reflect new stats
+            for stat, spin in self.stat_widgets.items():
+                # Determine racial/heritage modifier
+                if self.character.heritage and self.character.heritage.get("modifiers"):
+                    racial_mod = self.character.heritage["modifiers"].get(stat, 0)
+                elif self.character.race and self.character.race.get("modifiers"):
+                    racial_mod = self.character.race["modifiers"].get(stat, 0)
+                else:
+                    racial_mod = 0 # No modifier
+
+                # Update spin box value
+                spin.blockSignals(True)
+                # Set the range and value of the spin box based on racial modifiers
+                spin.setRange(7 + racial_mod, 18 + racial_mod)
+                # Set value to current stat plus racial modifier
+                spin.setValue(self.character.point_buy_stats[stat] + racial_mod)
+                spin.blockSignals(False)
+
+            # Update points label and emit stats changed signal
+            self.update_points_label()
+            self.stats_changed.emit()
+
+        # Ensure flag is reset after update
+        finally:
+            self._updating_stats = False

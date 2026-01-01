@@ -36,6 +36,7 @@ class MainWindow(QMainWindow):
         self.classes_tab = ClassTab(self.character)
         self.races_tab = RaceTab(self.character)
         self.heritage_tab = HeritageTab(self.character)
+        self.heritage_tab.refresh_heritage_options()
         self.background_tab = BackgroundTab(self.character)
         self.stats_tab = StatsTab(self.character)
         self.skills_tab = SkillsTab(self.character)
@@ -66,6 +67,7 @@ class MainWindow(QMainWindow):
         - Updates skill points display.
         """
         self.stats_tab.apply_race_bonuses(self.character.race)
+        self.heritage_tab.refresh_heritage_options()
         self.character.validate_feats(self.feats_tab.feats)
         self.feats_tab.update_feats()
         self.feats_tab.refresh_selected_feats()
