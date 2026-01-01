@@ -34,3 +34,21 @@ def test_total_points_spent(qtbot):
     # Set stats and verify total points spent
     char.point_buy_stats["Str"]  = 14
     assert stats_tab.total_points_spent()  == 5
+
+def test_update_stat_racial_modifier(qtbot):
+    """
+    Test updating a stat in StatsTab considering racial modifiers.
+    - Create a character with a racial modifier.
+    - Update a stat and verify the base stat is calculated correctly.
+    - Uses qtbot to handle the StatsTab widget.
+    Args:
+        qtbot: pytest-qt fixture for handling Qt widgets.
+    """
+    char = Character(
+        char_class={"name": "Fighter", "skill_points": 2},
+        race={"name": "Human", "modifiers": {"Str": 2}}
+    )
+    tab = StatsTab(char)
+    qtbot.addWidget(tab)
+    tab.update_stat("Str", displayed_value=15) # 15 displayed, 13 base
+    assert char.point_buy_stats["Str"] == 13 # 15 - 2 racial modifier
