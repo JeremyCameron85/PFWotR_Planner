@@ -11,8 +11,8 @@
             "Wis": 0,
             "Cha": 0
         },
-        "traits": ["Bonus Feat", "Extra Skill Point"],
-        "description": "Humans are known for their versatility and ambition, often excelling in a variety of fields due to their adaptability and determination."
+        "traits": ["Feat", "Skilled"],
+        "description": "Humans are versatile and ambitious, known for their adaptability and diverse talents."
     },
     {
         "name": "Elf",
@@ -26,7 +26,7 @@
             "Wis": 0,
             "Cha": 0
         },
-        "traits": ["Keen Senses", "Fey Ancestry"],
+        "traits": ["Keen Senses", "Elven Magic", "Elven Immunities", "Elven Weapon Familiarity", "Racial Heritage"],
         "description": "Elves are known for their grace, agility, and connection to nature, often possessing keen senses and a mystical heritage."
     },
     {
@@ -41,7 +41,142 @@
             "Wis": 0,
             "Cha": -2
         },
-        "traits": ["Darkvision", "Dwarven Resilience"],
+        "traits": ["Slow and Steady", "Stability", "Hardy", "Defensive Training - Giants", "Hatred - Orcs and Golbinoids", "Keen Senses", "Dwarven Weapon Familiarity", "Racial Heritage"],
         "description": "Dwarves are sturdy and resilient, known for their toughness, craftsmanship, and strong sense of tradition."
+    },
+    {
+        "name": "Gnome",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": -2,
+            "Dex": 0,
+            "Con": 2,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 2
+        },
+        "traits": ["Keen Senses", "Hatred - Reptilian Humanoids", "Defensive Training - Giants", "Illusion Resistance", "Gnome Magic", "Obsessive", "Slow Movement", "Racial Heritage"],
+        "description": "Gnomes are inventive and curious, often possessing a natural affinity for magic and a cheerful disposition."
+    },
+    {
+        "name": "Halfling",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": -2,
+            "Dex": 2,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 2
+        },
+        "traits": ["Fearless", "Slow Movement", "Sure-Footed", "Keen Senses", "Halfling Luck", "Racial Heritage"],
+        "description": "Halflings are small, agile creatures known for their luck, resourcefulness, and strong sense of community."
+    },
+    {
+        "name": "Half-Elf",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Keen Senses", "Elven Immunities", "Racial Heritage"],
+        "description": "Half-elves are a blend of human and elven heritage, combining the best traits of both races."
+    },
+    {
+        "name": "Half-Orc",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Intimidating", "Orc Weapon Familiarity", "Orc Ferocity", "Keen Senses", "Racial Heritage"],
+        "description": "Half-orcs are a blend of human and orc heritage, combining the best traits of both races."
+    },
+    {
+        "name": "Aasimar",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Heritage", "Light Halo", "Celestial Resistance"],
+        "description": "Aasimar are celestial beings with a divine heritage, often possessing a radiant aura and resistance to evil."
+    },
+    {
+        "name": "Tiefling",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Fiendish Resistance", "Tiefling Heritage"],
+        "description": "Tieflings are descended from fiends and possess a natural affinity for infernal magic."
+    },
+    {
+        "name": "Oread",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Slow Movement (Dwarf Blooded)", "Keen Senses", "Energy Resistance", "Acid Affinity", "Oread Heritage"],
+        "description": "Oreads are a hardy race of dwarves with a natural affinity for earth and acid."
+    },
+    {
+        "name": "Dhampir",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Dhampir Heritage", "Negative Energy Affinity", "Resist Level Drain", "Undead Resistance"],
+        "description": "Dhampirs are a blend of human and undead heritage, combining the best traits of both races."
+    },
+    {
+        "name": "Kitsune",
+        "skill_points_bonus": 0,
+        "bonus_feats": [],
+        "modifiers": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "traits": ["Kitsune Heritage", "Kitsune Magic", "Keen Senses", "Agile", "Change Shape"],
+        "description": "Kitsunes are a mystical race of fox-like beings with a natural affinity for magic and shape-shifting."
     }
 ]
